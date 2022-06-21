@@ -1,0 +1,27 @@
+RewriteEngine On
+
+
+RewriteRule /GESTIONRanc https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /GESTIONRanco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /ranco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /gestionRanco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /Ranco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /gestion  https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /Gestionranco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /gestionRANCO https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /GESTIONRANCO https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /GESTION  https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /RANCO https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /GestionRanco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /GESTIONranco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /gestionranco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /GestionRANCO http://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /Gestion https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /gestionruncu https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /gestionronco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /Gestionruncu https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /Gestionronco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /gestionRuncu https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /gestionRonco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+RewriteRule /gestionranco https://testing.ticket.ranco.cl/GestionRanco/ [R=301,L]
+
