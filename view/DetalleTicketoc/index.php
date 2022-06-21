@@ -53,7 +53,7 @@ if (isset($_SESSION["usu_id"])) {
 
               <div class="col-lg-2">
                 <fieldset class="form-group">
-                  <label class="form-label semibold" for="tickoc_coti_cerra">Cotizacion</label>
+                  <label class="form-label semibold" for="tickoc_coti_cerra">Ticket Cotizacion Asociado</label>
                   <input type="text" class="form-control" id="tickoc_coti_cerra" name="tickoc_coti_cerra" readonly>
                 </fieldset>
               </div>
@@ -122,7 +122,7 @@ if (isset($_SESSION["usu_id"])) {
                 </fieldset>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-lg-6" id="Ocultar_para_Cotizacion">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tickoc_orden">Nro de Orden </label>
                   <input type="text" class="form-control" id="tickoc_orden" name="tickoc_orden">
@@ -144,20 +144,22 @@ if (isset($_SESSION["usu_id"])) {
               </div>
 
               <!-- TODO: Remplazado de los checkbox por un combobox -->
-              <div class="col-lg-6">
+              <div class="col-lg-6" id="Ocultar_para_Cotizacion2">
                 <label class="form-label semibold" for="tickoc_geren">Estado de aprobacion para OC sobre 1M</label>
 
                 <select class="select2" id="tickoc_geren" name="tickoc_geren" data-placeholder="Seleccionar">
                   <option label="Seleccionar"></option>
-                  <option value="NO">Ninguna</option>
-                  <option value="SI">Aprobación Gerencia General</option>
-                  <option value="NO APLICA">No aplica aprobación Gerencia General</option>
+                  <option value="PENDIENTE">Pendiente</option>
+                  <option value="SI">Aprobado Gerencia</option>
+                  <option value="NO">No Aprobado</option>
+                  <option value="NO APLICA">No aplica aprobación Gerencia</option>
                 </select>
                 <hr>
                 <select class="select2" id="tickoc_geren2" name="tickoc_geren2" data-placeholder="Seleccionar">
                   <option label="Seleccionar"></option>
-                  <option value="NO">Ninguna</option>
-                  <option value="SI">Aprobación Gerencia General</option>
+                  <option value="PENDIENTE">Pendiente</option>
+                  <option value="SI">Aprobado Gerencia General</option>
+                  <option value="NO">No Aprobado Gerencia General</option>
                   <option value="NO APLICA">No aplica aprobación Gerencia General</option>
                 </select>
 
@@ -196,7 +198,7 @@ if (isset($_SESSION["usu_id"])) {
 
               <div class="col-lg-12">
                 <fieldset class="form-group">
-                  <label class="form-label semibold" for="tickocd_descripusu">Estados OC</label>
+                  <label class="form-label semibold" for="tickocd_descripusu" style="color:red;" align=center>Registro de Estados la Orden de Compra - Flujo</label>
                   <div id = "lblestadosoc">
 
                   </div>
@@ -206,7 +208,7 @@ if (isset($_SESSION["usu_id"])) {
 
               <div class="col-lg-12">
                 <fieldset class="form-group">
-                  <label class="form-label semibold" for="tickocd_descripusu">Descripción del Problema</label>
+                  <label class="form-label semibold" for="tickocd_descripusu">Descripción del Ticket OC</label>
                   <div class="summernote-theme-1">
                     <textarea id="tickocd_descripusu" name="tickocd_descripusu" class="summernote" name="name"></textarea>
                   </div>

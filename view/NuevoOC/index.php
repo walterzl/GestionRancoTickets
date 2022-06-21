@@ -64,10 +64,10 @@
 							</fieldset>
 						</div>
 
-						<div class="col-lg-2">
+						<div class="col-lg-3">
 							<fieldset class="form-group">
 								<label class="form-label">&nbsp;</label>
-								<a id="btnseleccionarcoti" name="btnseleccionarcoti" class="btn btn-success">Cotización</a>
+								<a id="btnseleccionarcoti" name="btnseleccionarcoti" class="btn btn-success">Asociar Ticket con Cotizacion</a>
 							</fieldset>
 						</div>
 

@@ -53,8 +53,10 @@ $(document).ready(function() {
             if (tip_id == 3){
                 $.post("../../controller/categoria.php?op=combo_select", { tip_id: tip_id,cat_id : 86 }, function (data) {
                     $("#cat_id").html(data);
+                    document.getElementById('cat_ido').style.display = 'none';
                 });
             }else{
+                document.getElementById('cat_ido').style.display = 'block';
                 $.post("../../controller/categoria.php?op=combo_x_tipo", { tip_id: tip_id }, function (data) {
                     $("#cat_id").html(data);
                 });

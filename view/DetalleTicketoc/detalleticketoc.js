@@ -406,6 +406,16 @@ function listardetalle(tickoc_id){
 
                 $('#tickoc_opc').val(data.tickoc_opc).trigger('change');
 
+                //esconder Elementos si es cat=cotizacion
+
+                if (data.cat_id=='80'){
+                    document.getElementById('Ocultar_para_Cotizacion').style.display = 'none';
+                    document.getElementById('Ocultar_para_Cotizacion2').style.display = 'none';
+                }else{
+                    document.getElementById('Ocultar_para_Cotizacion').style.display = 'block';
+                    document.getElementById('Ocultar_para_Cotizacion2').style.display = 'block';
+                }
+
                 if (data.tickoc_estado_texto == "Cerrado"){
                     $('#pnldetalle').hide();
                     $('#tickoc_orden').attr('readonly', true);

@@ -170,8 +170,8 @@ function limpiartable(){
                         "<th class='d-none d-sm-table-cell' style='width: 5%;'>Est.</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 20%;'>Fecha Creación</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 25%;'>Fecha Cierre</th>"+
-                        "<th class='d-none d-sm-table-cell' style='width: 25%;'>Est.Apro</th>"+
-                        "<th class='d-none d-sm-table-cell' style='width: 25%;'>Est.Apro1</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 25%;'>Est. Aprobacion Gerencia</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 25%;'>Est. Aprobacion G. General</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 25%;'>Agente Asignado</th>"+
                         "<th class='text-center' style='width: 5%;'>Ver</th>"+
                     "</tr>"+

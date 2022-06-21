@@ -57,7 +57,7 @@
 							</fieldset>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-6" id="cat_ido">
 							<fieldset class="form-group">
 								<label class="form-label semibold" for="cat_id">Categoria de la Solicitud*</label>
 								<select id="cat_id" name="cat_id" class="select2" data-placeholder="Seleccione el Tipo de Categoria">
