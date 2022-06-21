@@ -160,14 +160,29 @@ $cone = new conectar();
                     }
                 </style>
 
+                <!--  Hrefs PRoduccion 
                 <ul class="navega">
-                    <li><a href="https://ticket.ranco.cl//GestionRanco/?s=2">Solicitudes Mantencion</a></li>
+                    <li><a href="https://ticket.ranco.cl/GestionRanco/?s=2">Solicitudes Mantencion</a></li>
                     <li>/</li>
-                    <li><a href="https://ticket.ranco.cl//GestionRanco/?s=1">Solicitudes TI</a></li>
+                    <li><a href="https://ticket.ranco.cl/GestionRanco/?s=1">Solicitudes TI</a></li>
                     <li>/</li>
-                    <li><a href="https://ticket.ranco.cl//GestionRanco/?s=3">Solicitudes Orden de Compra</a></li>
+                    <li><a href="https://ticket.ranco.cl/GestionRanco/?s=3">Solicitudes Orden de Compra</a></li>
+
+                </ul> 
+                 -->
+
+
+                <!-- Hrefs Testing -->
+                <ul class="navega">
+                    <li><a href="https://testing.ticket.ranco.cl/GestionRanco/?s=2">Solicitudes Mantencion</a></li>
+                    <li>/</li>
+                    <li><a href="https://testing.ticket.ranco.cl/GestionRanco/?s=1">Solicitudes TI</a></li>
+                    <li>/</li>
+                    <li><a href="https://testing.ticket.ranco.cl/GestionRanco/?s=3">Solicitudes Orden de Compra</a></li>
 
                 </ul>
+
+                
 
                 <br />
                 <br />
