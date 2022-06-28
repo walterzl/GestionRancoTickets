@@ -704,7 +704,7 @@
                                         <tr>
                                             <td><?php echo ($row['fech_contactoprov']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_contactoprov']))); ?></td>
                                             <td><?php echo ($row['fech_envpropuesta']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_envpropuesta']))); ?></td>
-                                            <td><?php echo ($row['fech_envpropuesta']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_emitiroc']))); ?></td>
+                                            <td><?php echo ($row['fech_emitiroc']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_emitiroc']))); ?></td>
                                             <td><?php echo ($row['fech_norequiere']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_norequiere']))); ?></td>
                                             <td><?php echo ($row['fech_noajustapresup']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_noajustapresup']))); ?></td>
                                         </tr>

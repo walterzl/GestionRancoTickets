@@ -23,12 +23,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="estoc_nom1">Nombre 1 *</label>
+                        <label class="form-label" for="estoc_nom1">Abierto o Cerrado *</label>
                         <input type="text" class="form-control" id="estoc_nom1" name="estoc_nom1" placeholder="Ingrese Nombre" required>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label" for="estoc_nom2">Nombre 2 *</label>
+                        <label class="form-label" for="estoc_nom2">Nombre Estado Flujo *</label>
                         <input type="text" class="form-control" id="estoc_nom2" name="estoc_nom2" placeholder="Ingrese Nombre" required>
                     </div>
 
