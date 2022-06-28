@@ -38,8 +38,8 @@
 					<thead>
 						<tr>
 							<th style="width: 10%;">Tipo</th>
-							<th style="width: 10%;">Nombre 1</th>
-							<th style="width: 10%;">Nombre 2</th>
+							<th style="width: 10%;">Abierto o Cerrado</th>
+							<th style="width: 10%;">Nombre Estado Flujo</th>
 							<th class="text-center" style="width: 5%;"></th>
 							<th class="text-center" style="width: 5%;"></th>
 						</tr>

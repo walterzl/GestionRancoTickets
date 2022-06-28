@@ -695,6 +695,7 @@
                                         <tr>
                                             <th>Contacto Proveedor</th>
                                             <th>Envio de propuesta</th>
+                                            <th>Emitir OC</th>
                                             <th>Producto no se requiere</th>
                                             <th>Valor no se ajusta al presupuesto</th>
                                         </tr>
@@ -703,6 +704,7 @@
                                         <tr>
                                             <td><?php echo ($row['fech_contactoprov']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_contactoprov']))); ?></td>
                                             <td><?php echo ($row['fech_envpropuesta']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_envpropuesta']))); ?></td>
+                                            <td><?php echo ($row['fech_envpropuesta']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_emitiroc']))); ?></td>
                                             <td><?php echo ($row['fech_norequiere']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_norequiere']))); ?></td>
                                             <td><?php echo ($row['fech_noajustapresup']=="" ? "" : date("d/m/Y H:i:s", strtotime($row['fech_noajustapresup']))); ?></td>
                                         </tr>

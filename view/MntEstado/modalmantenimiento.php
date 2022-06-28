@@ -47,6 +47,7 @@
                             <option value='fech_serviconforme'>fech_serviconforme</option>
                             <option value='fech_norequiere'>fech_norequiere</option>
                             <option value='fech_noajustapresup'>fech_noajustapresup</option>
+                            <option value='fech_emitiroc'>fech_emitiroc</option>
                         </select>
                     </div>
 
