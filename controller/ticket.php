@@ -89,7 +89,7 @@
                         $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                     }
 
-                    if ($row["fech_dig"]==""){
+                    /* if ($row["fech_dig"]==""){
                         $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
                     }else{
                         $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_dig"]));
@@ -111,7 +111,7 @@
                         $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
                     }else{
                         $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_repbode"]));
-                    }
+                    } */
 
                     if ($row["usu_asig"]==""){
                         $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
@@ -376,7 +376,7 @@
                         $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                     }
 
-                    if ($row["fech_dig"]==""){
+                    /* if ($row["fech_dig"]==""){
                         $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
                     }else{
                         $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_dig"]));
@@ -398,7 +398,7 @@
                         $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
                     }else{
                         $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_repbode"]));
-                    }
+                    } */
 
                     if ($row["usu_asig"]==""){
                         $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
