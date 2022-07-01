@@ -49,7 +49,7 @@ $(document).ready(function(){
 });
 
 function ver(tick_id){
-    window.open('../../view/DetalleTicketoc/?ID='+ tick_id +'','_self');
+    window.open('../../view/DetalleTicketoc/?ID='+ tick_id +'','_Blank');
 }
 
 function asignar(tick_id){

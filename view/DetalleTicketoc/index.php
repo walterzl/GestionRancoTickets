@@ -77,7 +77,7 @@ if (isset($_SESSION["usu_id"])) {
                 </fieldset>
               </div>
 
-              <div class="col-lg-6" id="lblcatid">
+              <div class="col-lg-6" id="lblcatid" style="visibility:hidden">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="cat_id">Tipo Categoria </label>
                   <select class="select2" id="cat_id" name="cat_id" data-placeholder="Seleccionar">
@@ -145,8 +145,9 @@ if (isset($_SESSION["usu_id"])) {
 
               <!-- TODO: Remplazado de los checkbox por un combobox -->
               <div class="col-lg-6" id="Ocultar_para_Cotizacion2">
-                <label class="form-label semibold" for="tickoc_geren">Estado de aprobacion para OC sobre 1M</label>
+                <!-- <label class="form-label semibold" for="tickoc_geren">Estado de aprobacion ↴</label> -->
 
+                <label class="form-label semibold" for="tickoc_geren">Estado de aprobacion Gerencia ↴: </label>
                 <select class="select2" id="tickoc_geren" name="tickoc_geren" data-placeholder="Seleccionar">
                   <option label="Seleccionar"></option>
                   <option value="PENDIENTE">Pendiente</option>
@@ -154,7 +155,9 @@ if (isset($_SESSION["usu_id"])) {
                   <option value="NO">No Aprobado</option>
                   <option value="NO APLICA">No aplica aprobación Gerencia</option>
                 </select>
-                <hr>
+                
+                </br>
+                <label class="form-label semibold" for="tickoc_geren">Estado de aprobacion Gerencia General Sobre 1MM ↴: </label>
                 <select class="select2" id="tickoc_geren2" name="tickoc_geren2" data-placeholder="Seleccionar">
                   <option label="Seleccionar"></option>
                   <option value="PENDIENTE">Pendiente</option>

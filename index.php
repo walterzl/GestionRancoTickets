@@ -32,6 +32,14 @@ $cone = new conectar();
 
                 <div class="sign-box" id="login_form">
 
+                    
+                   <!--  <div class="sign-box">
+                        <div class="error-title">Sitio en Mantenimiento Ranco Esperamos su Comprension. Gracias! 🧡 9 AM a 10 AM  </div>
+                    </div>
+                    </br>
+
+                    <div class="sign-box" id="login_form"> -->
+
 
                     <?php
                     if (isset($_GET["s"])) { //si salta el msg de error M
@@ -140,8 +148,8 @@ $cone = new conectar();
                         }
                     }
                     ?>
-
-                    <input type="hidden" name="enviar" class="form-control" value="si"> <!-- nombre del boton acceder que toma la funcion login -->
+                     <!-- nombre del boton acceder que toma la funcion login -->
+                    <input type="hidden" name="enviar" class="form-control" value="si">
                     <button type="submit" class="btn btn-rounded" onclick="login()">Acceder</button>
                     </form>
 
@@ -160,7 +168,7 @@ $cone = new conectar();
                     }
                 </style>
 
-                <!--  Hrefs PRoduccion 
+                  
                 <ul class="navega">
                     <li><a href="https://ticket.ranco.cl/GestionRanco/?s=2">Solicitudes Mantencion</a></li>
                     <li>/</li>
@@ -169,18 +177,18 @@ $cone = new conectar();
                     <li><a href="https://ticket.ranco.cl/GestionRanco/?s=3">Solicitudes Orden de Compra</a></li>
 
                 </ul> 
-                 -->
+                
 
 
                 <!-- Hrefs Testing -->
-                <ul class="navega">
+                <!-- <ul class="navega">
                     <li><a href="https://testing.ticket.ranco.cl/GestionRanco/?s=2">Solicitudes Mantencion</a></li>
                     <li>/</li>
                     <li><a href="https://testing.ticket.ranco.cl/GestionRanco/?s=1">Solicitudes TI</a></li>
                     <li>/</li>
                     <li><a href="https://testing.ticket.ranco.cl/GestionRanco/?s=3">Solicitudes Orden de Compra</a></li>
 
-                </ul>
+                </ul> -->
 
                 
 

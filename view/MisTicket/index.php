@@ -51,10 +51,12 @@
 										<th class="d-none d-sm-table-cell" style="width: 5%;">Est.</th>
 										<th class="d-none d-sm-table-cell" style="width: 20%;">Fech.Crea.</th>
 										<th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Cierre</th>
+										<!-- columnas de flujo -->
 										<!-- <th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Orden Digitada</th>
 										<th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Orden Aprobada</th>
 										<th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Orden Env.Prov.</th>
 										<th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Orden Recep.Bodega</th> -->
+										<!--  -->
 										<th class="d-none d-sm-table-cell" style="width: 25%;">Agente Asignado</th>
 										<th class="text-center" style="width: 5%;">ver</th>
 									<?php
