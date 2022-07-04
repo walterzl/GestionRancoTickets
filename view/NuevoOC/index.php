@@ -73,7 +73,7 @@
 
 						<div class="col-lg-1">
 							<fieldset class="form-group">
-								<label class="form-label">Nro</label>
+								<label class="form-label">Nro Coitizacion Asociado</label>
 								<input type="text" class="form-control" id="correlativo" name="correlativo" readonly>
 							</fieldset>
 						</div>
