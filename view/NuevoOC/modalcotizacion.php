@@ -12,9 +12,10 @@
                         <thead>
                             <tr>
                                 <th>Nro</th>
-                                <th>Orden</th>
+                                <!-- <th>Orden</th> -->
                                 <th>Tipo</th>
-                                <th>Categoria</th>
+                                <!-- <th>Categoria</th> -->
+                                <th>Estado Orden</th>
                                 <th>Area</th>
                                 <th>Sub Area</th>
                                 <th>Titulo</th>

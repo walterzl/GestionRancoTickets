@@ -238,18 +238,23 @@
             foreach($datos as $row){
                 $sub_array = array();
                 $sub_array[] = $row["tickoc_corre"];
-                $sub_array[] = $row["tickoc_orden"];
+
                 $sub_array[] = $row["tip_nom"];
-                $sub_array[] = $row["cat_nom"];
+                $sub_array[] = $row["estoc_nom2"];
                 $sub_array[] = $row["area_nom"];
                 $sub_array[] = $row["suba_nom"];
                 $sub_array[] = $row["tickoc_titulo"];
+               
 
                 if ($row["tickoc_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
                     $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
                 }
+
+                
+                
+                
 
                 $sub_array[] = '<button type="button" onClick="seleccionar('.$row["tickoc_id"].');"  id="'.$row["tickoc_id"].'" class="btn btn-inline btn-success btn-sm ladda-button"><i class="fa fa-check"></i></button>';
                 $data[] = $sub_array;

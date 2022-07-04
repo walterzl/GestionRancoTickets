@@ -159,6 +159,11 @@ $(document).ready(function(){
     if (rol_id==1){
         $("#tickoc_orden").attr("readonly","readonly");
         $("#estoc_id").attr("readonly","readonly");
+    }else if(rol_id==7){
+        $("#tickoc_orden").attr("readonly","readonly");
+        $("#estoc_id").attr("disabled", true);
+        $("#tickoc_geren").attr("disabled", true);
+        $("#tickoc_geren2").attr("disabled", true);
     }
 
 });
@@ -257,10 +262,11 @@ $(document).on("click","#btnenviar", function(){
                         console.log(data);
                         listardetalle(tickoc_id);
                         $('#tickocd_descrip').summernote('reset');
+                        
+                        /* TODO: Alerta de DetalleOC */
+                        $.post("../../controller/email.php?op=ticket_detalleoc", {tickoc_id:tickoc_id}, function (data) {
 
-                        /* $.post("../../controller/email.php?op=ticket_detalleoc", {tickoc_id:tickoc_id}, function (data) {
-
-                        }); */
+                        });
 
                         swal("Correcto!", "Registrado Correctamente", "success");
                         }
