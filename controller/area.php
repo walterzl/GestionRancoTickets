@@ -56,7 +56,7 @@
             $datos = $area->get_area($_POST["sis_id"]);
             if(is_array($datos)==true and count($datos)>0){
                 $html="";
-                $html.= "<option label='Seleccionar'></option>";
+                $html.= "<option label='Seleccione'></option>";
                 foreach($datos as $row)
                 {
                     $html.= "<option value='".$row['area_id']."'>".$row['area_nom']."</option>";
@@ -68,7 +68,8 @@
         case "combo_select":
             $datos = $area->get_area($_POST["sis_id"],$_POST["area_id"]);
             if(is_array($datos)==true and count($datos)>0){
-                $html.= "<option label='Seleccionar'></option>";
+                $html="";
+                $html.= "<option label='Seleccione'></option>";
                 foreach($datos as $row)
                 {
                     if($row['area_id']==$_POST["area_id"]){

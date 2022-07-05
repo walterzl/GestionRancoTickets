@@ -56,6 +56,7 @@
         case "combo":
             $datos = $subarea->get_subarea_x_area($_POST["area_id"]);
             if(is_array($datos)==true and count($datos)>0){
+                $html="";
                 $html.= "<option label='Seleccionar'></option>";
                 foreach($datos as $row)
                 {
@@ -68,6 +69,7 @@
         case "combo_select":
             $datos = $subarea->get_subarea_x_area($_POST["area_id"]);
             if(is_array($datos)==true and count($datos)>0){
+                $html="";
                 $html.= "<option label='Seleccionar'></option>";
                 foreach($datos as $row)
                 {

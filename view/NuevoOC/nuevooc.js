@@ -91,7 +91,7 @@ $(document).ready(function() {
 
                 $('#btnseleccionarcoti').show();
 
-                $('#correlativo').val();
+                $('#correlativo').val(''); /* $('#correlativo').val(); */
                 $('#tickoc_coti_cerra').val();
 
                 $.post("../../controller/entrega.php?op=combo",{sis_id:sis_id},function(data, status){
@@ -103,7 +103,7 @@ $(document).ready(function() {
 
                 $('#btnseleccionarcoti').show();
 
-                $('#correlativo').val();
+                $('#correlativo').val(''); /* $('#correlativo').val(); */
                 $('#tickoc_coti_cerra').val();
 
                 $.post("../../controller/duracion.php?op=combo",{sis_id:sis_id},function(data, status){
@@ -115,10 +115,13 @@ $(document).ready(function() {
 
                 $('#btnseleccionarcoti').hide();
 
-                $('#correlativo').val();
+                $('#correlativo').val(''); /* $('#correlativo').val(); */
                 $('#tickoc_coti_cerra').val();
             }
 
+            $("#area_id").select2({disabled:false});
+            $("#suba_id").select2({disabled:false});
+            $("#cntcon_id").select2({disabled:false});
         });
     });
 
@@ -330,7 +333,25 @@ function seleccionar(tickoc_id){
         data = JSON.parse(data);
         $('#tickoc_coti_cerra').val(data.tickoc_id);
         $('#correlativo').val(data.tickoc_corre);
+
+        $.post("../../controller/area.php?op=combo_select", { sis_id: 3,area_id: data.area_id }, function (data) {
+            $("#area_id").html(data);
+        });
+
+        $.post("../../controller/subarea.php?op=combo_select", {area_id: data.area_id, suba_id: data.suba_id }, function (data) {
+            $("#suba_id").html(data);
+        });
+
+        $.post("../../controller/plancontable.php?op=combo_select", { sis_id: 3,cntcon_id: data.cntcon_id }, function (data) {
+            $("#cntcon_id").html(data);
+
+        });
+
     });
+
+    $("#area_id").select2({disabled:'readonly'});
+    $("#suba_id").select2({disabled:'readonly'});
+    $("#cntcon_id").select2({disabled:'readonly'});
 
     $('#modalmantenimiento').modal('hide');
 }

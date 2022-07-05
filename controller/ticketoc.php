@@ -24,6 +24,9 @@
                 $duracion = $_POST["dura_id"];
             }
 
+            /*  */
+            
+    
             $datos=$ticketoc->insert_ticketoc($_POST["usu_id"],$_POST["cat_id"],$_POST["tickoc_titulo"],$_POST["tickoc_descrip"],$_POST["area_id"],$_POST["suba_id"],$_POST["tip_id"],$entrega,$_POST["cntcon_id"],$duracion,$_POST["tickoc_coti_cerra"]);
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
@@ -54,6 +57,7 @@
 
                 }
                 echo json_encode($output);
+                
             }
             break;
 
@@ -474,7 +478,9 @@
 
                         $output["tickoc_titulo"] = $row["tickoc_titulo"];
                         $output["tickoc_descrip"] = $row["tickoc_descrip"];
+                        $output["area_id"] = $row["area_id"];
                         $output["area_nom"] = $row["area_nom"];
+                        $output["suba_id"] = $row["suba_id"];
                         $output["suba_nom"] = $row["suba_nom"];
 
                         if ($row["tickoc_estado"]=="Abierto"){
@@ -502,6 +508,7 @@
 
                         $output["ent_nom"] = $row["ent_nom"];
                         $output["dura_nom"] = $row["dura_nom"];
+                        $output["cntcon_id"] = $row["cntcon_id"];
                         $output["cntcon_nom"] = $row["cntcon_nom"];
                         $output["cntcon_nom2"] = $row["cntcon_nom2"];
 

@@ -21,5 +21,22 @@
             }
             break;
 
+            case "combo_select":
+                $datos = $plancontable->get_plancontable($_POST["sis_id"]);
+                if(is_array($datos)==true and count($datos)>0){
+                    $html="";
+                    $html.= "<option label='Seleccionar'></option>";
+                    foreach($datos as $row)
+                    {
+                        if($row['cntcon_id']==$_POST["cntcon_id"]){
+                            $html.= "<option value='".$row['cntcon_id']."' selected>".$row['cntcon_nom']."-".$row['cntcon_nom2']."</option>";
+                        }else{
+                            $html.= "<option value='".$row['cntcon_id']."'>".$row['cntcon_nom']."-".$row['cntcon_nom2']."</option>";
+                        }
+                    }
+                    echo $html;
+                }
+                break;
+
     }
 ?>
