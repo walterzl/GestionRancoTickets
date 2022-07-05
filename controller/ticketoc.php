@@ -24,9 +24,6 @@
                 $duracion = $_POST["dura_id"];
             }
 
-            /*  */
-            
-    
             $datos=$ticketoc->insert_ticketoc($_POST["usu_id"],$_POST["cat_id"],$_POST["tickoc_titulo"],$_POST["tickoc_descrip"],$_POST["area_id"],$_POST["suba_id"],$_POST["tip_id"],$entrega,$_POST["cntcon_id"],$duracion,$_POST["tickoc_coti_cerra"]);
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
@@ -57,7 +54,6 @@
 
                 }
                 echo json_encode($output);
-                
             }
             break;
 
@@ -242,24 +238,15 @@
             foreach($datos as $row){
                 $sub_array = array();
                 $sub_array[] = $row["tickoc_corre"];
-
                 $sub_array[] = $row["tip_nom"];
-                $sub_array[] = $row["estoc_nom2"];
-                $sub_array[] = $row["area_nom"];
-                $sub_array[] = $row["suba_nom"];
-                $sub_array[] = $row["tickoc_titulo"];
-               
-
                 if ($row["tickoc_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{
                     $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
                 }
-
-                
-                
-                
-
+                $sub_array[] = $row["area_nom"];
+                $sub_array[] = $row["suba_nom"];
+                $sub_array[] = $row["tickoc_titulo"];
                 $sub_array[] = '<button type="button" onClick="seleccionar('.$row["tickoc_id"].');"  id="'.$row["tickoc_id"].'" class="btn btn-inline btn-success btn-sm ladda-button"><i class="fa fa-check"></i></button>';
                 $data[] = $sub_array;
             }

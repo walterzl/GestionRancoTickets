@@ -91,7 +91,7 @@ $(document).ready(function() {
 
                 $('#btnseleccionarcoti').show();
 
-                $('#correlativo').val(''); /* $('#correlativo').val(); */
+                $('#correlativo').val('');
                 $('#tickoc_coti_cerra').val();
 
                 $.post("../../controller/entrega.php?op=combo",{sis_id:sis_id},function(data, status){
@@ -103,7 +103,7 @@ $(document).ready(function() {
 
                 $('#btnseleccionarcoti').show();
 
-                $('#correlativo').val(''); /* $('#correlativo').val(); */
+                $('#correlativo').val('');
                 $('#tickoc_coti_cerra').val();
 
                 $.post("../../controller/duracion.php?op=combo",{sis_id:sis_id},function(data, status){
@@ -115,17 +115,18 @@ $(document).ready(function() {
 
                 $('#btnseleccionarcoti').hide();
 
-                $('#correlativo').val(''); /* $('#correlativo').val(); */
+                $('#correlativo').val('');
                 $('#tickoc_coti_cerra').val();
             }
 
             $("#area_id").select2({disabled:false});
             $("#suba_id").select2({disabled:false});
             $("#cntcon_id").select2({disabled:false});
+
         });
     });
 
-    /* Ocultar Mensaje para Duracion segun info */
+    /*TODO: Ocultar Mensaje para Duracion segun info */
     $("#dura_id").change(function(){
         $("#dura_id option:selected").each(function () {
             dura_id = $(this).val();
@@ -248,6 +249,10 @@ $(document).ready(function() {
 });
 
 function guardaryeditar(e){
+    $("#area_id").select2({disabled:false});
+    $("#suba_id").select2({disabled:false});
+    $("#cntcon_id").select2({disabled:false});
+
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
     if ($('#tickoc_descrip').summernote('isEmpty')  || $('#tickoc_titulo').val()=='' || $('#suba_id').val()=='' || $('#tip_id').val()=='' || $('#cat_id').val()==''){
@@ -269,6 +274,11 @@ function guardaryeditar(e){
                 data = JSON.parse(data);
                 $('#tickoc_titulo').val('');
                 $('#tickoc_descrip').summernote('reset');
+
+                $("#area_id").select2({disabled:'readonly'});
+                $("#suba_id").select2({disabled:'readonly'});
+                $("#cntcon_id").select2({disabled:'readonly'});
+
                 swal("Correcto!", "OC Generado : "+ data.tickoc_corre+" \n Sera redirigido al Home en unos segundos al dar en 'Aceptar'", "success");
 
                 $.post("../../controller/ticketoc.php?op=insertotro",{tickoc_id:data.tickoc_id},function(data, status){
@@ -344,7 +354,6 @@ function seleccionar(tickoc_id){
 
         $.post("../../controller/plancontable.php?op=combo_select", { sis_id: 3,cntcon_id: data.cntcon_id }, function (data) {
             $("#cntcon_id").html(data);
-
         });
 
     });

@@ -262,7 +262,7 @@ $(document).on("click","#btnenviar", function(){
                         console.log(data);
                         listardetalle(tickoc_id);
                         $('#tickocd_descrip').summernote('reset');
-                        
+
                         /* TODO: Alerta de DetalleOC */
                         $.post("../../controller/email.php?op=ticket_detalleoc", {tickoc_id:tickoc_id}, function (data) {
 

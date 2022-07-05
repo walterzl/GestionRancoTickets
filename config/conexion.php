@@ -15,7 +15,6 @@
                 //WalterHOME
                 /* $conectar = $this->dbh = new PDO("sqlsrv:Server=DESKTOP-CGLV30V,1433;Database=GestionRanco2", "sa", "123456"); */
 
-
                 //Produccion
                 /* $conectar = $this->dbh = new PDO("sqlsrv:Server=192.168.1.14,1433;Database=GestionRanco", "GestionRanco", "Walter20"); */
 
@@ -30,7 +29,8 @@
         public static function ruta(){
             /* Ruta principal del proyecto se centraliza desde aqui toda la ruta principal del proyecto */
 			/* return "https://ticket.ranco.cl/GestionRanco/"; */
-            return "http://localhost/GestionRancoTickets/";
+            /* return "http://localhost/GestionRancoTickets/"; */
+            return "http://localhost/Gestion/";
 		}
 
     }
