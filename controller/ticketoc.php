@@ -239,6 +239,7 @@
                 $sub_array = array();
                 $sub_array[] = $row["tickoc_corre"];
                 $sub_array[] = $row["tip_nom"];
+                $sub_array[] = $row["estoc_nom2"];
                 if ($row["tickoc_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                 }else{

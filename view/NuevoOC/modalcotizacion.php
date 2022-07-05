@@ -12,14 +12,12 @@
                         <thead>
                             <tr>
                                 <th>Nro</th>
-                                <!-- <th>Orden</th> -->
                                 <th>Tipo</th>
-                                <!-- <th>Categoria</th> -->
                                 <th>Estado Orden</th>
+                                <th>Est. Ticket</th>
                                 <th>Area</th>
                                 <th>Sub Area</th>
                                 <th>Titulo</th>
-                                <th>Est.</th>
                                 <th>Ver</th>
                             </tr>
                         </thead>
