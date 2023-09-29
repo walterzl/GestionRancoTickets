@@ -28,9 +28,10 @@
 
         public static function ruta(){
             /* Ruta principal del proyecto se centraliza desde aqui toda la ruta principal del proyecto */
-			/* return "https://ticket.ranco.cl/GestionRanco/"; */
-            return "http://localhost/GestionRancoTickets/";
-            /* return "http://localhost/Gestion/"; */
+			/* return "https://ticket.ranco.cl/GestionRanco2/"; */
+            return "https://testing.ticket.ranco.cl/GestionRanco2/";
+            /* return "http://localhost/GestionRanco2/"; */
+            
 		}
 
     }

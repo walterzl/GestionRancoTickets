@@ -126,7 +126,7 @@ $(document).ready(function() {
 function guardaryeditar(e){
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
-    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()=='' || $('#tick_prio').val()=='' || $('#suba_id').val()=='' || $('#tip_id').val()=='' || $('#cat_id').val()==''){
+    if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()=='' || $('#tick_prio').val()=='' || $('#suba_id').val()=='' || $('#tip_id').val()=='' || $('#cat_id').val()==''|| $('#tick_Planta').val()==''){
         swal("Advertencia!", "Campos Vacios", "warning");
     }else{
         var totalfiles = $('#fileElem').get(0).files.length;

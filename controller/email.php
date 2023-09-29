@@ -37,5 +37,13 @@
         case "ticket_detalleoc":
             $email->ticketoc_detalle($_POST["tickoc_id"]);
             break;
+
+        case "ticket_abiertoResponsablesoc": //envio Correo Responsables OC
+            $email->ticket_abiertoResponsablesoc($_POST["tickoc_id"]);
+            break;
+        
+        case "ticket_CerradoResponsablesoc": //envio Correo Responsables OC
+            $email->ticket_cerradoResponsablesoc($_POST["tickoc_id"]);
+            break;
     }
 ?>

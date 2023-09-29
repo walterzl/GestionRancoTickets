@@ -27,6 +27,8 @@ $(document).ready(function(){
         $("#estoc_id").html(data);
     });
 
+    
+
     if (sis_id==3){
         $('#divorden').show();
         $('#divestado').show();
@@ -107,6 +109,7 @@ function filtro(tip_id,area_id,tick_estado,usu_asig_est,tickoc_orden,estoc_id,fe
     var area_id = $('#area_id').val();
     var tick_estado = $('#tick_estado').val();
     var usu_asig_est = $('#usu_asig_est').val();
+    /* var tick_Planta = $('#tick_Planta').val(); */
 
     tabla=$('#ticket_data').dataTable({
         "aProcessing": true,
@@ -169,6 +172,7 @@ $(document).on("click","#btntodo", function(){
     var area_id = $('#area_id').val('').trigger('change');
     var tick_estado = $('#tick_estado').val('').trigger('change');
     var usu_asig_est = $('#usu_asig_est').val('').trigger('change');
+    var tick_Planta = $('#tick_Planta').val('').trigger('change');
 
     var tickoc_orden = $('#tickoc_orden').val('');
     var estoc_id = $('#estoc_id').val('').trigger('change');;
@@ -185,6 +189,7 @@ function limpiartable(){
                         "<th style='width: 5%;'>Nro</th>"+
                         "<th style='width: 15%;'>Tipo</th>"+
                         "<th style='width: 15%;'>Categoria</th>"+
+                        "<th style='width: 15%;'>Planta</th>"+
                         "<th style='width: 15%;'>Area</th>"+
                         "<th style='width: 15%;'>Sub Area</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 40%;'>Titulo</th>"+
@@ -211,6 +216,7 @@ $(document).on("click","#btnfiltrar", function(){
     var area_id = $('#area_id').val();
     var tick_estado = $('#tick_estado').val();
     var usu_asig_est = $('#usu_asig_est').val();
+    /* var tick_Planta = $('#tick_Planta').val(); */
 
     tabla=$('#ticket_data').dataTable({
         "aProcessing": true,

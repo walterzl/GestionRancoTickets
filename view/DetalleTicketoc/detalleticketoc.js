@@ -72,6 +72,13 @@ $(document).ready(function(){
                     $('#tickoc_orden').attr('readonly', true);
                     $("#tickoc_check1").attr("disabled", true);
                     $("#tickoc_check2").attr("disabled", true);
+
+                    var tickoc_id = getUrlParameter('ID');
+                    var usu_id = $('#user_idx').val();
+                    
+                    $.post("../../controller/email.php?op=ticket_CerradoResponsablesoc",{tickoc_id:tickoc_id},function(data, status){
+                    });
+
                 }else{
                     $('#tickoc_orden').attr('readonly', false);
                     $("#tickoc_check1").attr("disabled", false);
@@ -304,6 +311,10 @@ $(document).on("click","#btncerrarticket", function(){
 
                     });
 
+                    $.post("../../controller/email.php?op=ticket_CerradoResponsablesoc",{tickoc_id:tickoc_id},function(data, status){
+
+                    });
+
                     listardetalle(tickoc_id);
 
                     swal({
@@ -344,6 +355,10 @@ $(document).on("click","#btncerrarticket", function(){
                     });
 
                     $.post("../../controller/email.php?op=ticket_cerradooc",{tickoc_id:tickoc_id},function(data, status){
+
+                    });
+
+                    $.post("../../controller/email.php?op=ticket_CerradoResponsablesoc",{tickoc_id:tickoc_id},function(data, status){
 
                     });
 

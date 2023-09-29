@@ -66,6 +66,18 @@
 							</fieldset>
 						</div>
 
+						<div class="col-lg-6">
+							<fieldset class="form-group">
+								<label class="form-label semibold" for="tick_Planta">Planta*</label>
+								<select id="tick_Planta" name="tick_Planta" class="select2" data-placeholder="Seleccione Planta">
+									<option label='Seleccionar'></option>
+									<option value='Planta Rancagua'>Planta Rancagua</option>
+									<option value='Planta Chimbarongo'>Planta Chimbarongo</option>
+									<option value='Planta Union'>Planta La Union</option>
+								</select>
+							</fieldset>
+						</div>
+
 						<div class="col-lg-12">
 							<fieldset class="form-group">
 								<label class="form-label semibold" for="tick_titulo">Titulo de su Solicitud*</label>

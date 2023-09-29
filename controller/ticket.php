@@ -15,7 +15,7 @@
     switch($_GET["op"]){
 
         case "insert":
-            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"],$_POST["tick_prio"],$_POST["area_id"],$_POST["suba_id"],$_POST["tip_id"]);
+            $datos=$ticket->insert_ticket($_POST["usu_id"],$_POST["cat_id"],$_POST["tick_titulo"],$_POST["tick_descrip"],$_POST["tick_prio"],$_POST["area_id"],$_POST["suba_id"],$_POST["tip_id"],$_POST["tick_Planta"]);
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
                 {
@@ -140,6 +140,7 @@
                     $sub_array[] = $row["tick_corre"];
                     $sub_array[] = $row["tip_nom"];
                     $sub_array[] = $row["cat_nom"];
+                    $sub_array[] = $row["tick_Planta"];
                     $sub_array[] = $row["area_nom"];
                     $sub_array[] = $row["suba_nom"];
                     $sub_array[] = $row["tick_titulo"];
@@ -195,6 +196,7 @@
                 $sub_array[] = $row["tick_id"];
                 $sub_array[] = $row["tip_nom"];
                 $sub_array[] = $row["cat_nom"];
+                $sub_array[] = $row["tick_Planta"]; 
                 $sub_array[] = $row["area_nom"];
                 $sub_array[] = $row["suba_nom"];
                 $sub_array[] = $row["tick_titulo"];
@@ -249,6 +251,7 @@
                 $sub_array[] = $row["tick_corre"];
                 $sub_array[] = $row["tip_nom"];
                 $sub_array[] = $row["cat_nom"];
+                $sub_array[] = $row["tick_Planta"]; 
                 $sub_array[] = $row["area_nom"];
                 $sub_array[] = $row["suba_nom"];
                 $sub_array[] = $row["tick_titulo"];
@@ -427,6 +430,7 @@
                     $sub_array[] = $row["tick_corre"];
                     $sub_array[] = $row["tip_nom"];
                     $sub_array[] = $row["cat_nom"];
+                    $sub_array[] = $row["tick_Planta"]; 
                     $sub_array[] = $row["area_nom"];
                     $sub_array[] = $row["suba_nom"];
                     $sub_array[] = $row["tick_titulo"];
@@ -527,6 +531,7 @@
                     $sub_array[] = $row["tick_corre"];
                     $sub_array[] = $row["tip_nom"];
                     $sub_array[] = $row["cat_nom"];
+                    $sub_array[] = $row["tick_Planta"]; 
                     $sub_array[] = $row["area_nom"];
                     $sub_array[] = $row["suba_nom"];
                     $sub_array[] = $row["tick_titulo"];
@@ -698,6 +703,7 @@
                         $output["usu_nom"] = $row["usu_nom"];
                         $output["usu_ape"] = $row["usu_ape"];
                         $output["cat_nom"] = $row["cat_nom"];
+                        $output["tick_Planta"] = $row["tick_Planta"];
                         $output["usu_asig"] = $row["usu_asig"];
                         $output["tick_corre"] = $row["tick_corre"];
                     }
@@ -708,7 +714,7 @@
             break;
 
         case "insertdetalle":
-            $datos=$ticket->insert_ticketdetalle($_POST["tick_id"],$_POST["usu_id"],$_POST["tickd_descrip"]);
+            /* $datos=$ticket->insert_ticketdetalle($_POST["tick_id"],$_POST["usu_id"],$_POST["tickd_descrip"]);
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
                 {
@@ -736,7 +742,32 @@
                     }
 
                 }
-                echo json_encode($output);
+                echo json_encode($output); */
+
+                $datos = $ticket->insert_ticketdetalle($_POST["tick_id"],$_POST["usu_id"],$_POST["tickd_descrip"]);
+                if($datos > 0) {
+                    $ruta = '../public/files/' . $datos . '/';
+                    if (!file_exists($ruta)) {
+                        mkdir($ruta, 0777, true);
+                    }
+
+                    if ($_FILES['files']['name'] != 0) {
+                        $countfiles = count($_FILES['files']['name']);
+                        $files_arr = array();
+
+                        for ($index = 0; $index < $countfiles; $index++) {
+                            $doc1 = $_FILES["files"]['tmp_name'][$index];
+                            $destino = $ruta . $_FILES["files"]["name"][$index];
+
+                            $ticket->insert_ticket_file($datos, $_FILES["files"]["name"][$index]);
+
+                            move_uploaded_file($doc1, $destino);
+                        }
+                    }
+
+                    $output["tickd_id"] = $datos;
+                    echo json_encode($output);
+
             }
             break;
 

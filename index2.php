@@ -48,21 +48,21 @@
                             switch($_GET["s"]){
                                 case "1"; //si es m=1 los datos son incorrectos
                                     ?>
-                                        <header class="sign-title">Acceso Usuarios - Solicitudes TI</header>
+                                        <header class="sign-title">Acceso Usuarios - Solicitudes TI - TEST</header>
                                         <input type="hidden" id="sis_id" name="sis_id" value="1">
                                     <?php
                                 break;
 
                                 case "2";  //si m=2 los campos estan vacios o no llenados por el usuario
                                     ?>
-                                        <header class="sign-title">Acceso Usuarios - Solicitudes Mantencion</header>
+                                        <header class="sign-title">Acceso Usuarios - Solicitudes Mantencion - TEST</header>
                                         <input type="hidden" id="sis_id" name="sis_id" value="2">
                                     <?php
                                 break;
 
                                 case "3";  //si m=3 los campos estan vacios o no llenados por el usuario
                                     ?>
-                                        <header class="sign-title">Acceso Usuarios - Solicitudes de Compra</header>
+                                        <header class="sign-title">Acceso Usuarios - Solicitudes de Compra - TEST</header>
                                         <input type="hidden" id="sis_id" name="sis_id" value="3">
                                     <?php
                                 break;

@@ -26,13 +26,17 @@ if (isset($_SESSION["usu_id"])) {
               <div class="tbl-cell">
                 <h3 id="lblnomidticket">Detalle Ticket - </h3>
                 <div id="lblestado"></div>
+                <span class="label label-pill label-warning" id="tick_PlantaTEXT"></span>
+
                 <span class="label label-pill label-primary" id="lblnomusuario"></span>
                 <span class="label label-pill label-default" id="lblfechcrea"></span>
+                
                 <ol class="breadcrumb breadcrumb-simple">
                   <li><a href="..\Home\">Home</a></li>
                   <li><a href="..\Consultarticket\">Consultar tickets</a></li>
                   <li class="active">Detalle Ticket</li>
-                  <li><a href="javascript:history.go(-1);" style="color:#FF0000;">Volver Atras</a></li>
+                  <!-- <li><a href="javascript:history.go(-1);" style="color:#FF0000;">Volver Atras</a></li> -->
+                  <!-- <li><a href="window.history.back(-1);" style="color:#FF0000;">Volver Atras</a></li> -->
                 </ol>
               </div>
             </div>
@@ -94,6 +98,8 @@ if (isset($_SESSION["usu_id"])) {
                 </fieldset>
               </div>
 
+              
+
               <div class="col-lg-12">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tick_titulo">Titulo</label>
@@ -101,14 +107,21 @@ if (isset($_SESSION["usu_id"])) {
                 </fieldset>
               </div>
 
-              <div class="col-lg-6">
+              <div class="col-lg-4" id="planta">
+                <fieldset class="form-group">
+                  <label class="form-label semibold" for="tick_Planta">Planta</label>
+                  <input type="text" class="form-control" id="tick_Planta" name="tick_Planta" readonly>
+                </fieldset>
+              </div>
+
+              <div class="col-lg-4">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tick_prio">Prioridad</label>
                   <input type="text" class="form-control" id="tick_prio" name="tick_prio" readonly>
                 </fieldset>
               </div>
 
-              <div class="col-lg-6" id="lblopcion">
+              <div class="col-lg-4" id="lblopcion">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tick_opc">Opción</label>
                   <select class="select2" id="tick_opc" name="tick_opc" data-placeholder="Seleccionar">
@@ -123,6 +136,7 @@ if (isset($_SESSION["usu_id"])) {
                         
                       <?php
                     }?>
+                    
 
                     <!-- opciones de sistema 2 Mantencion -->
                     <?php
@@ -139,6 +153,8 @@ if (isset($_SESSION["usu_id"])) {
                   </select>
                 </fieldset>
               </div>
+
+              
 
               <div class="col-lg-12">
                 <fieldset class="form-group">

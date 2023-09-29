@@ -65,6 +65,7 @@
 										<th style="width: 5%;">Nro</th>
 										<th style="width: 15%;">Tipo</th>
 										<th style="width: 15%;">Categoria</th>
+										<th style="width: 15%;">Planta</th>
 										<th style="width: 15%;">Area</th>
 										<th style="width: 15%;">Sub.Area</th>
 										<th class="d-none d-sm-table-cell" style="width: 40%;">Titulo</th>

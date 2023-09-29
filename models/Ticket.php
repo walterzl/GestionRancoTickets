@@ -2,11 +2,12 @@
     class Ticket extends Conectar{
 
         /* Funcion necesaria para insertar un nuevo registro */
-        public function insert_ticket($usu_id,$cat_id,$tick_titulo,$tick_descrip,$tick_prio,$area_id,$suba_id,$tip_id){
+        public function insert_ticket($usu_id,$cat_id,$tick_titulo,$tick_descrip,$tick_prio,$area_id,$suba_id,$tip_id,$tick_Planta){
             $conectar= parent::conexion();
             /*consulta SQL*/
             $sis_id = $_SESSION["sis_id"];
-            $sql="INSERT INTO tm_ticket (sis_id,tick_corre,usu_id,cat_id,tick_titulo,tick_descrip,tick_estado,tick_prio,area_id,suba_id,fech_cierre,fech_crea,tip_id,est) VALUES ($sis_id,(SELECT COUNT(*) + 1 FROM tm_ticket WHERE sis_id = $sis_id),?,?,?,?,'Abierto',?,?,?,NULL,getdate(),?,'1');";
+            //$sql="INSERT INTO tm_ticket (sis_id,tick_corre,usu_id,cat_id,tick_titulo,tick_descrip,tick_estado,tick_prio,area_id,suba_id,fech_cierre,fech_crea,tip_id,est)           VALUES ($sis_id,(SELECT COUNT(*) + 1 FROM tm_ticket WHERE sis_id = $sis_id),?,?,?,?,'Abierto',?,?,?,NULL,getdate(),?,'1');";
+            $sql="INSERT INTO tm_ticket (sis_id,tick_corre,usu_id,cat_id,tick_titulo,tick_descrip,tick_estado,tick_prio,area_id,suba_id,fech_cierre,fech_crea,tip_id,est,tick_Planta) VALUES ($sis_id,(SELECT COUNT(*) + 1 FROM tm_ticket WHERE sis_id = $sis_id),?,?,?,?,'Abierto',?,?,?,NULL,getdate(),?,'1',?);";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_id);
             $sql->bindValue(2, $cat_id);
@@ -16,6 +17,7 @@
             $sql->bindValue(6, $area_id);
             $sql->bindValue(7, $suba_id);
             $sql->bindValue(8, $tip_id);
+            $sql->bindValue(9, $tick_Planta);
             $sql->execute();
             /* genera el ultimo id ingresado para alertar en la vista al generar el ticket */
             $sql1="SELECT tick_id,tick_corre FROM tm_ticket WHERE tick_id = @@IDENTITY";
@@ -111,19 +113,20 @@
 
         /* Funcion necesaria para registrar ticket detalle guardando su id de ticket principal */ 
         public function insert_ticketdetalle($tick_id,$usu_id,$tickd_descrip){
-            $conectar= parent::conexion();
-             /*consulta SQL*/
-                $sql="INSERT INTO td_ticketdetalle (tick_id,usu_id,tickd_descrip,fech_crea,est) VALUES (?,?,?,getdate(),1);";
-            $sql=$conectar->prepare($sql);
+            
+            $conectar = parent::conexion();
+            /*consulta SQL*/
+            $sql = "INSERT INTO td_ticketdetalle (tick_id,usu_id,tickd_descrip,fech_crea,est) VALUES (?,?,?,getdate(),1);";
+            $sql = $conectar->prepare($sql);
             $sql->bindValue(1, $tick_id);
             $sql->bindValue(2, $usu_id);
             $sql->bindValue(3, $tickd_descrip);
             $sql->execute();
-            /* genera el ultimo id ingresado para alertar en la vista al generar el ticket */
-            $sql1="SELECT tickd_id FROM td_ticketdetalle WHERE tickd_id = @@IDENTITY";
-            $sql1=$conectar->prepare($sql1);
-            $sql1->execute();
-            return $resultado=$sql1->fetchall(pdo::FETCH_ASSOC);
+
+            /* Obtiene el último ID insertado */
+            $lastInsertedId = $conectar->lastInsertId();
+
+            return $lastInsertedId;
         }
 
         /* Funcion necesaria para insertar una linea adicional para cerrar el ticket en tabla detalle */ 

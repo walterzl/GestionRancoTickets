@@ -32,7 +32,7 @@ if (isset($_SESSION["usu_id"])) {
                   <li><a href="..\Home\">Home</a></li>
                   <li><a href="..\Consultarticket\">Consultar Orden de Compra</a></li>
                   <li class="active">Detalle Orden de Compra</li>
-                  <li><a href="javascript:history.go(-1);" style="color:#FF0000;">Volver Atras</a></li>
+                  <!-- <li><a href="javascript:history.go(-1);" style="color:#FF0000;">Volver Atras</a></li> -->
                 </ol>
               </div>
             </div>

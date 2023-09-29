@@ -289,6 +289,10 @@ function guardaryeditar(e){
 
                 });
 
+                $.post("../../controller/email.php?op=ticket_abiertoResponsablesoc",{tickoc_id:data.tickoc_id},function(data, status){
+                    console.log(data);
+                });
+
                 swal({
                     title: "Correcto!",
                     text: "OC Generado : "+ data.tickoc_corre +" \n \n Sera redirigido al Home en unos segundos al dar en el boton 'Aceptar'",

@@ -386,6 +386,9 @@ function listardetalle(tick_id){
                 $('#tickd_descripusu').summernote ('code',data.tick_descrip);
                 $('#area_nom').val(data.area_nom);
                 $('#suba_nom').val(data.suba_nom);
+                $('#tick_Planta').val(data.tick_Planta);
+                $('#tick_PlantaTEXT').html(data.tick_Planta);
+
                 $('#tick_prio').val(data.tick_prio);
 
                 $('#usu_asig').val(data.usu_asig);

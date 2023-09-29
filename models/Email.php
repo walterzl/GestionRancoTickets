@@ -20,11 +20,15 @@ class Email  extends PHPMailer
         foreach ($datos as $row) {
             $id = $row["tick_corre"];
             $usu = $row["usu_nom"];
+            $usuapellido = $row["usu_ape"];
             $titulo = $row["tick_titulo"];
             $prioridad = $row["tick_prio"];
             $categoria = $row["cat_nom"];
             $area = $row["area_nom"];
             $correo = $row["usu_correo"];
+            $descripcion= $row["tick_descrip"];
+            $planta=$row["tick_Planta"];
+
             $sis_nom = $row["sis_nom"];
             $tip_nom = $row["tip_nom"];
             $correla = $row["tick_corre"];
@@ -67,10 +71,13 @@ class Email  extends PHPMailer
             /* parametros del template a remplazar */
             $cuerpo = str_replace('xnroticket', $id, $cuerpo);
             $cuerpo = str_replace('lblNomUsu', $usu, $cuerpo);
+            $cuerpo = str_replace('lblApellidoUsu', $usuapellido, $cuerpo);
             $cuerpo = str_replace('lblTitu', $titulo, $cuerpo);
             $cuerpo = str_replace('lblPrio', $prioridad, $cuerpo);
+            $cuerpo = str_replace('lblPlanta', $planta, $cuerpo);
             $cuerpo = str_replace('lblCate', $categoria, $cuerpo);
             $cuerpo = str_replace('lblAre', $area, $cuerpo);
+            $cuerpo = str_replace('lblDescripcion', $descripcion, $cuerpo);
             $cuerpo = str_replace('lblsisnom', $sis_nom, $cuerpo);
             $cuerpo = str_replace('lblruta', $rut.'view/DetalleTicket/?ID='.$tick_id, $cuerpo);
 
@@ -157,6 +164,7 @@ class Email  extends PHPMailer
             $prioridad = $row["tick_prio"];
             $categoria = $row["cat_nom"];
             $area = $row["area_nom"];
+            $descripcion= $row["tick_descrip"];
             $correo = $row["usu_correo"];
 
             $gCorreo = $row["sis_correo"];
@@ -198,6 +206,7 @@ class Email  extends PHPMailer
             $cuerpo = str_replace('lblPrio', $prioridad, $cuerpo);
             $cuerpo = str_replace('lblCate', $categoria, $cuerpo);
             $cuerpo = str_replace('lblAre', $area, $cuerpo);
+            $cuerpo = str_replace('lblDescripcion', $descripcion, $cuerpo);
             $cuerpo = str_replace('lblruta', $rut.'view/DetalleTicket/?ID='.$tick_id, $cuerpo);
             $this->Body = $cuerpo;
             $this->IsHTML(true);
@@ -280,6 +289,7 @@ class Email  extends PHPMailer
             $prioridad = $row["tick_prio"];
             $categoria = $row["cat_nom"];
             $area = $row["area_nom"];
+            $descripcion= $row["tick_descrip"];
             $asignado = $row["usu_asig"];
 
             $gCorreo = $row["sis_correo"];
@@ -327,6 +337,7 @@ class Email  extends PHPMailer
             $cuerpo = str_replace('lblPrio', $prioridad, $cuerpo);
             $cuerpo = str_replace('lblCate', $categoria, $cuerpo);
             $cuerpo = str_replace('lblAre', $area, $cuerpo);
+            $cuerpo = str_replace('lblDescripcion', $descripcion, $cuerpo);
             $cuerpo = str_replace('lblruta', $rut.'view/DetalleTicket/?ID='.$tick_id, $cuerpo);
             $this->Body = $cuerpo;
             $this->IsHTML(true);
@@ -409,6 +420,8 @@ class Email  extends PHPMailer
             $categoria = $row["cat_nom"];
             $area = $row["area_nom"];
             $correo = $row["usu_correo"];
+            $descripcion= $row["tick_descrip"];
+
             $sis_nom = $row["sis_nom"];
             $tip_nom = $row["tip_nom"];
             $correla = $row["tick_corre"];
@@ -474,6 +487,7 @@ class Email  extends PHPMailer
             $cuerpo = str_replace('lblPrio', $prioridad, $cuerpo);
             $cuerpo = str_replace('lblCate', $categoria, $cuerpo);
             $cuerpo = str_replace('lblAre', $area, $cuerpo);
+            $cuerpo = str_replace('lblDescripcion', $descripcion, $cuerpo);
             $cuerpo = str_replace('lblsisnom', $sis_nom, $cuerpo);
             $cuerpo = str_replace('tbodyFinal', $tbodyFinal, $cuerpo);
             $cuerpo = str_replace('lblruta', $rut.'view/DetalleTicket/?ID='.$tick_id, $cuerpo);
@@ -573,4 +587,157 @@ class Email  extends PHPMailer
             return $this->Send();
         }
     }
+
+    public function ticket_abiertoResponsablesoc($tickoc_id)
+    {
+        $ticketoc = new Ticketoc();
+        $datos = $ticketoc->listar_ticketoc_x_id($tickoc_id);
+        foreach ($datos as $row) {
+            $id = $row["tickoc_corre"];
+            $usu = $row["usu_nom"];
+            $titulo = $row["tickoc_titulo"];
+            /* $prioridad = $row["tickoc_prio"]; */
+            $categoria = $row["cat_nom"];
+            $area = $row["area_nom"];
+            $subarea = $row["suba_nom"];
+            $correo = $row["usu_correo"];
+            $descripcion= $row["tickoc_descrip"];
+
+            $sis_nom = $row["sis_nom"];
+            $tip_nom = $row["tip_nom"];
+            $correla = $row["tickoc_corre"];
+
+            $gCorreo = $row["sis_correo"];
+            $gContrasena = $row["sis_correo_pass"];
+
+            //$usu_grupal = $row["usu_grupal"];
+
+            $CorreoGerente_Responsable= $row["area_correo_geren"];
+            $CorreoJefatura_Responsable = $row["suba_correo_geren"];
+        }
+
+        $ruta = new Conectar();
+        $rut = $ruta->ruta();
+
+    
+        $this->IsSMTP();
+        $this->Host = 'smtp.office365.com';//Aqui el server
+        $this->Port = 587;//Aqui el puerto
+        $this->SMTPAuth = true;
+        $this->Username = $gCorreo;
+        $this->Password = $gContrasena;
+        $this->From = $gCorreo;
+        $this->SMTPSecure = 'tls';
+        $this->FromName = $this->tu_nombre = "Aviso Para Gerencia y Jefatura-Ticket Abierto OC N° ".$correla." - ".$tip_nom;
+        $this->CharSet = 'UTF8';
+
+        $this->addAddress($CorreoGerente_Responsable);
+        $this->addAddress($CorreoJefatura_Responsable);
+        
+        /* $this->addAddress($correo); */
+        /* $this->addAddress("wzuniga@ranco.cl"); */
+        
+        /* Correo Grupal para alerta */
+        /* $this->addAddress($usu_grupal); */
+
+        $this->WordWrap = 50;
+        $this->IsHTML(true);
+        /* $this->Subject = "Ticket Abierto"; */
+        $this->Subject = $this->tu_nombre = "Aviso Para Gerencia y Jefatura-Ticket Abierto OC N° ".$correla." - ".$tip_nom;
+        /* Ruta del template en formato HTML */
+        $cuerpo = file_get_contents('../public/NuevoTicketocResponsable.html'); 
+        /* parametros del template a remplazar */
+        $cuerpo = str_replace('xnroticket', $id, $cuerpo);
+        $cuerpo = str_replace('lblNomUsu', $usu, $cuerpo);
+        $cuerpo = str_replace('lblTitu', $titulo, $cuerpo);
+        /* $cuerpo = str_replace('lblPrio', $prioridad, $cuerpo); */
+        $cuerpo = str_replace('lblCate', $categoria, $cuerpo);
+        $cuerpo = str_replace('lblAre', $area, $cuerpo);
+        $cuerpo = str_replace('lblSubAre', $subarea, $cuerpo);
+        $cuerpo = str_replace('lblDescripcion', $descripcion, $cuerpo);
+        $cuerpo = str_replace('lblsisnom', $sis_nom, $cuerpo);
+        $cuerpo = str_replace('lblruta', $rut.'view/DetalleTicketoc/?ID='.$tickoc_id, $cuerpo);
+
+        $this->Body = $cuerpo;
+        $this->IsHTML(true);
+        $this->AltBody = strip_tags("Ticket OC");
+        return $this->Send();
+    }
+
+    public function ticket_cerradoResponsablesoc($tickoc_id)
+    {
+        $ticketoc = new Ticketoc();
+        $datos = $ticketoc->listar_ticketoc_x_id($tickoc_id);
+        foreach ($datos as $row) {
+            $id = $row["tickoc_corre"];
+            $usu = $row["usu_nom"];
+            $titulo = $row["tickoc_titulo"];
+            /* $prioridad = $row["tickoc_prio"]; */
+            $categoria = $row["cat_nom"];
+            $area = $row["area_nom"];
+            $subarea = $row["suba_nom"];
+            $correo = $row["usu_correo"];
+            $descripcion= $row["tickoc_descrip"];
+
+            $sis_nom = $row["sis_nom"];
+            $tip_nom = $row["tip_nom"];
+            $correla = $row["tickoc_corre"];
+
+            $gCorreo = $row["sis_correo"];
+            $gContrasena = $row["sis_correo_pass"];
+
+            //$usu_grupal = $row["usu_grupal"];
+
+            $CorreoGerente_Responsable= $row["area_correo_geren"];
+            $CorreoJefatura_Responsable = $row["suba_correo_geren"];
+        }
+
+        $ruta = new Conectar();
+        $rut = $ruta->ruta();
+
+    
+        $this->IsSMTP();
+        $this->Host = 'smtp.office365.com';//Aqui el server
+        $this->Port = 587;//Aqui el puerto
+        $this->SMTPAuth = true;
+        $this->Username = $gCorreo;
+        $this->Password = $gContrasena;
+        $this->From = $gCorreo;
+        $this->SMTPSecure = 'tls';
+        $this->FromName = $this->tu_nombre = "Aviso Para Gerencia y Jefatura Ticket Cerrado N° ".$correla." - ".$tip_nom;
+        $this->CharSet = 'UTF8';
+
+        $this->addAddress($CorreoGerente_Responsable);
+        $this->addAddress($CorreoJefatura_Responsable);
+        
+        /* $this->addAddress($correo); */
+        /* $this->addAddress("wzuniga@ranco.cl"); */
+        
+        /* Correo Grupal para alerta */
+        /* $this->addAddress($usu_grupal); */
+
+        $this->WordWrap = 50;
+        $this->IsHTML(true);
+        /* $this->Subject = "Ticket Abierto"; */
+        $this->Subject = $this->tu_nombre = "Aviso Para Gerencia y Jefatura-Ticket Cerrado OC N° ".$correla." - ".$tip_nom;
+        /* Ruta del template en formato HTML */
+        $cuerpo = file_get_contents('../public/CerradoTicketocResponsables.html'); 
+        /* parametros del template a remplazar */
+        $cuerpo = str_replace('xnroticket', $id, $cuerpo);
+        $cuerpo = str_replace('lblNomUsu', $usu, $cuerpo);
+        $cuerpo = str_replace('lblTitu', $titulo, $cuerpo);
+        /* $cuerpo = str_replace('lblPrio', $prioridad, $cuerpo); */
+        $cuerpo = str_replace('lblCate', $categoria, $cuerpo);
+        $cuerpo = str_replace('lblAre', $area, $cuerpo);
+        $cuerpo = str_replace('lblSubAre', $subarea, $cuerpo);
+        $cuerpo = str_replace('lblsisnom', $sis_nom, $cuerpo);
+        $cuerpo = str_replace('lblDescripcion', $descripcion, $cuerpo);
+        $cuerpo = str_replace('lblruta', $rut.'view/DetalleTicketoc/?ID='.$tickoc_id, $cuerpo);
+
+        $this->Body = $cuerpo;
+        $this->IsHTML(true);
+        $this->AltBody = strip_tags("Ticket OC");
+        return $this->Send();
+    }
+    
 }
