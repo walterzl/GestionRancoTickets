@@ -102,14 +102,15 @@ function asignar(tick_id){
     
 }
 
-function filtro(tip_id,area_id,tick_estado,usu_asig_est,tickoc_orden,estoc_id,fech_crea){
+function filtro(tip_id,area_id,tick_estado,usu_asig_est,tickoc_orden,estoc_id,fech_crea,tick_Planta){
+    
     limpiartable();
 
     var tip_id = $('#tip_id').val();
     var area_id = $('#area_id').val();
     var tick_estado = $('#tick_estado').val();
     var usu_asig_est = $('#usu_asig_est').val();
-    /* var tick_Planta = $('#tick_Planta').val(); */
+    var tick_Planta = $('#tick_Planta').val();
 
     tabla=$('#ticket_data').dataTable({
         "aProcessing": true,
@@ -128,7 +129,7 @@ function filtro(tip_id,area_id,tick_estado,usu_asig_est,tickoc_orden,estoc_id,fe
             url: '../../controller/ticket.php?op=listar_filtro',
             type : "post",
             dataType : "json",
-            data:{tip_id:tip_id,area_id:area_id,tick_estado:tick_estado,usu_asig_est:usu_asig_est,sis_id:sis_id},
+            data:{tip_id:tip_id,area_id:area_id,tick_estado:tick_estado,usu_asig_est:usu_asig_est,sis_id:sis_id,tick_Planta:tick_Planta},
             error: function(e){
                 console.log(e.responseText);
             }
@@ -178,7 +179,7 @@ $(document).on("click","#btntodo", function(){
     var estoc_id = $('#estoc_id').val('').trigger('change');;
     var fech_crea = $('#fech_crea').val('');
 
-    filtro(tip_id,area_id,tick_estado,usu_asig_est,tickoc_orden,estoc_id,fech_crea);
+    filtro(tip_id,area_id,tick_estado,usu_asig_est,tickoc_orden,estoc_id,fech_crea,tick_Planta);
 });
 
 function limpiartable(){
@@ -216,7 +217,7 @@ $(document).on("click","#btnfiltrar", function(){
     var area_id = $('#area_id').val();
     var tick_estado = $('#tick_estado').val();
     var usu_asig_est = $('#usu_asig_est').val();
-    /* var tick_Planta = $('#tick_Planta').val(); */
+    var tick_Planta = $('#tick_Planta').val();
 
     tabla=$('#ticket_data').dataTable({
         "aProcessing": true,
@@ -235,7 +236,7 @@ $(document).on("click","#btnfiltrar", function(){
             url: '../../controller/ticket.php?op=listar_filtro',
             type : "post",
             dataType : "json",
-            data:{tip_id:tip_id,area_id:area_id,tick_estado:tick_estado,usu_asig_est:usu_asig_est,sis_id:sis_id},
+            data:{tip_id:tip_id,area_id:area_id,tick_estado:tick_estado,usu_asig_est:usu_asig_est,sis_id:sis_id,tick_Planta:tick_Planta},
             error: function(e){
                 console.log(e.responseText);
             }

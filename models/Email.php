@@ -25,9 +25,11 @@ class Email  extends PHPMailer
             $prioridad = $row["tick_prio"];
             $categoria = $row["cat_nom"];
             $area = $row["area_nom"];
+            $subarea= $row["suba_nom"];
             $correo = $row["usu_correo"];
             $descripcion= $row["tick_descrip"];
             $planta=$row["tick_Planta"];
+            $fechacreacion= $row["FechaCorta"];
 
             $sis_nom = $row["sis_nom"];
             $tip_nom = $row["tip_nom"];
@@ -72,11 +74,13 @@ class Email  extends PHPMailer
             $cuerpo = str_replace('xnroticket', $id, $cuerpo);
             $cuerpo = str_replace('lblNomUsu', $usu, $cuerpo);
             $cuerpo = str_replace('lblApellidoUsu', $usuapellido, $cuerpo);
+            $cuerpo = str_replace('fech_crea', $fechacreacion, $cuerpo);
             $cuerpo = str_replace('lblTitu', $titulo, $cuerpo);
             $cuerpo = str_replace('lblPrio', $prioridad, $cuerpo);
             $cuerpo = str_replace('lblPlanta', $planta, $cuerpo);
             $cuerpo = str_replace('lblCate', $categoria, $cuerpo);
             $cuerpo = str_replace('lblAre', $area, $cuerpo);
+            $cuerpo = str_replace('lblsubarea', $subarea, $cuerpo);
             $cuerpo = str_replace('lblDescripcion', $descripcion, $cuerpo);
             $cuerpo = str_replace('lblsisnom', $sis_nom, $cuerpo);
             $cuerpo = str_replace('lblruta', $rut.'view/DetalleTicket/?ID='.$tick_id, $cuerpo);
@@ -166,6 +170,8 @@ class Email  extends PHPMailer
             $area = $row["area_nom"];
             $descripcion= $row["tick_descrip"];
             $correo = $row["usu_correo"];
+            $planta=$row["tick_Planta"];
+            $fechacreacion= $row["fech_crea"];
 
             $gCorreo = $row["sis_correo"];
             $gContrasena = $row["sis_correo_pass"];
@@ -291,6 +297,11 @@ class Email  extends PHPMailer
             $area = $row["area_nom"];
             $descripcion= $row["tick_descrip"];
             $asignado = $row["usu_asig"];
+            $planta=$row["tick_Planta"];
+            $usuapellido = $row["usu_ape"];
+            $subarea= $row["suba_nom"];
+            $fechacreacion= $row["FechaCorta"];
+
 
             $gCorreo = $row["sis_correo"];
             $gContrasena = $row["sis_correo_pass"];
@@ -333,10 +344,14 @@ class Email  extends PHPMailer
             /* parametros del template a remplazar */
             $cuerpo = str_replace('xnroticket', $id, $cuerpo);
             $cuerpo = str_replace('lblNomUsu', $usu, $cuerpo);
+            $cuerpo = str_replace('lblApellidoUsu', $usuapellido, $cuerpo);
+            $cuerpo = str_replace('fech_crea', $fechacreacion, $cuerpo);
             $cuerpo = str_replace('lblTitu', $titulo, $cuerpo);
             $cuerpo = str_replace('lblPrio', $prioridad, $cuerpo);
             $cuerpo = str_replace('lblCate', $categoria, $cuerpo);
             $cuerpo = str_replace('lblAre', $area, $cuerpo);
+            $cuerpo = str_replace('lblsubarea', $subarea, $cuerpo);
+            $cuerpo = str_replace('lblPlanta', $planta, $cuerpo);
             $cuerpo = str_replace('lblDescripcion', $descripcion, $cuerpo);
             $cuerpo = str_replace('lblruta', $rut.'view/DetalleTicket/?ID='.$tick_id, $cuerpo);
             $this->Body = $cuerpo;
@@ -421,6 +436,7 @@ class Email  extends PHPMailer
             $area = $row["area_nom"];
             $correo = $row["usu_correo"];
             $descripcion= $row["tick_descrip"];
+            $planta=$row["tick_Planta"];
 
             $sis_nom = $row["sis_nom"];
             $tip_nom = $row["tip_nom"];

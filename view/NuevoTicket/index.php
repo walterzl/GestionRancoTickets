@@ -48,7 +48,7 @@
 
 						<input type="hidden" id="suba_id" name="suba_id" value="<?php echo $_SESSION["suba_id"] ?>">
 
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<fieldset class="form-group">
 								<label class="form-label semibold" for="tip_id">Tipo Solicitud*</label>
 								<select id="tip_id" name="tip_id" class="select2" data-placeholder="Seleccione Tipo de Solicitud">
@@ -57,7 +57,7 @@
 							</fieldset>
 						</div>
 
-						<div class="col-lg-6" id="cat_ido">
+						<div class="col-lg-5" id="cat_ido">
 							<fieldset class="form-group">
 								<label class="form-label semibold" for="cat_id">Categoria de la Solicitud*</label>
 								<select id="cat_id" name="cat_id" class="select2" data-placeholder="Seleccione el Tipo de Categoria">
@@ -66,14 +66,14 @@
 							</fieldset>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-3">
 							<fieldset class="form-group">
 								<label class="form-label semibold" for="tick_Planta">Planta*</label>
 								<select id="tick_Planta" name="tick_Planta" class="select2" data-placeholder="Seleccione Planta">
 									<option label='Seleccionar'></option>
-									<option value='Planta Rancagua'>Planta Rancagua</option>
-									<option value='Planta Chimbarongo'>Planta Chimbarongo</option>
-									<option value='Planta Union'>Planta La Union</option>
+									<option value='Rancagua'>Rancagua</option>
+									<option value='Chimbarongo'>Chimbarongo</option>
+									<option value='La Union'>La Union</option>
 								</select>
 							</fieldset>
 						</div>

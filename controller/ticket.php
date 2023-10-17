@@ -133,7 +133,7 @@
                     "aaData"=>$data);
                 echo json_encode($results);
             }else{
-                $datos=$ticket->listar_ticket_x_usu($_POST["usu_id"]);
+                $datos=$ticket->listar_ticket_x_usu($_POST["usu_id"], $_POST["tip_id"],$_POST["area_id"],$_POST["tick_estado"],$_POST["usu_asig_est"],$_POST["sis_id"],$_POST["tick_Planta"]);
                 $data= Array();
                 foreach($datos as $row){
                     $sub_array = array();
@@ -244,7 +244,7 @@
             break;
 
         case "listar_filtro":
-            $datos=$ticket->filtro_ticket($_POST["tip_id"],$_POST["area_id"],$_POST["tick_estado"],$_POST["usu_asig_est"],$_POST["sis_id"]);
+            $datos=$ticket->filtro_ticket($_POST["tip_id"],$_POST["area_id"],$_POST["tick_estado"],$_POST["usu_asig_est"],$_POST["sis_id"],$_POST["tick_Planta"]);
             $data= Array();
             foreach($datos as $row){
                 $sub_array = array();
@@ -297,7 +297,8 @@
                 "sEcho"=>1,
                 "iTotalRecords"=>count($data),
                 "iTotalDisplayRecords"=>count($data),
-                "aaData"=>$data);
+                "aaData"=>$data
+            );
             echo json_encode($results);
             break;
 
@@ -423,7 +424,7 @@
                     "aaData"=>$data);
                 echo json_encode($results);
             }else{
-                $datos=$ticket->listar_ticket_x_asig($_POST["usu_asig"]);
+                $datos=$ticket->listar_ticket_x_asig($_POST["usu_asig"], $_POST["tip_id"],$_POST["area_id"],$_POST["tick_estado"],$_POST["usu_asig_est"],$_POST["sis_id"],$_POST["tick_Planta"]);
                 $data= Array();
                 foreach($datos as $row){
                     $sub_array = array();
@@ -524,7 +525,7 @@
                     "aaData"=>$data);
                 echo json_encode($results);
             }else{
-                $datos=$ticket->listar_ticket_x_grupo($_POST["grupo_id"]);
+                $datos=$ticket->listar_ticket_x_grupo($_POST["grupo_id"], $_POST["tip_id"],$_POST["area_id"],$_POST["tick_estado"],$_POST["usu_asig_est"],$_POST["sis_id"],$_POST["tick_Planta"]);
                 $data= Array();
                 foreach($datos as $row){
                     $sub_array = array();

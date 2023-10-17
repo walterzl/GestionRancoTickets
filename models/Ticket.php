@@ -27,36 +27,69 @@
         }
 
         /* Funcion necesaria para listar ticket por usuario */ 
-        public function listar_ticket_x_usu($usu_id){
+        public function listar_ticket_x_usu($usu_id,$tip_id,$area_id,$tick_estado,$usu_asig_est,$sis_id, $tick_Planta = ""){
             $conectar= parent::conexion();
              /*consulta SQL*/
-            $sql="SP_L_TICKET_03 ?";
+            $sql="SP_L_TICKET_03 ?,?,?,?,?,?";
+            if(!empty($tick_Planta)){
+                $sql="SP_L_TICKET_03_PL ?,?,?,?,?,?,?";
+            }
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_id);
+            $sql->bindValue(2, $tip_id);
+            $sql->bindValue(3, $area_id);
+            $sql->bindValue(4, $tick_estado);
+            $sql->bindValue(5, $usu_asig_est);
+            $sql->bindValue(6, $sis_id);
+            if(!empty($tick_Planta)){
+                $sql->bindValue(7, $tick_Planta);
+            }
             $sql->execute();
             /* retornar resultado en variable resultado y usarlo en el controllador */
             return $resultado=$sql->fetchAll();
         }
 
         /* Funcion necesaria para listar ticket por grupo */ 
-        public function listar_ticket_x_grupo($grupo_id){
+        public function listar_ticket_x_grupo($grupo_id,$tip_id,$area_id,$tick_estado,$usu_asig_est,$sis_id, $tick_Planta = ""){
             $conectar= parent::conexion();
              /*consulta SQL*/
-            $sql="SP_L_TICKET_04 ?";
+            $sql="SP_L_TICKET_04 ?,?,?,?,?,?";
+            if(!empty($tick_Planta)){
+                $sql="SP_L_TICKET_04_PL ?,?,?,?,?,?,?";
+            }
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $grupo_id);
+            $sql->bindValue(2, $tip_id);
+            $sql->bindValue(3, $area_id);
+            $sql->bindValue(4, $tick_estado);
+            $sql->bindValue(5, $usu_asig_est);
+            $sql->bindValue(6, $sis_id);
+            if(!empty($tick_Planta)){
+                $sql->bindValue(7, $tick_Planta);
+            }
             $sql->execute();
             /* retornar resultado en variable resultado y usarlo en el controllador */
             return $resultado=$sql->fetchAll();
         }
 
         /* Funcion necesaria para listar ticket sin asignar usuario */ 
-        public function listar_ticket_x_asig($usu_asig){
+        public function listar_ticket_x_asig($usu_asig,$tip_id,$area_id,$tick_estado,$usu_asig_est,$sis_id, $tick_Planta = ""){
             $conectar= parent::conexion();
             /*consulta SQL*/
-            $sql="SP_L_TICKET_05 ?";
+            $sql="SP_L_TICKET_05 ?,?,?,?,?,?";
+            if(!empty($tick_Planta)){
+                $sql="SP_L_TICKET_05_PL ?,?,?,?,?,?,?";
+            }
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $usu_asig);
+            $sql->bindValue(2, $tip_id);
+            $sql->bindValue(3, $area_id);
+            $sql->bindValue(4, $tick_estado);
+            $sql->bindValue(5, $usu_asig_est);
+            $sql->bindValue(6, $sis_id);
+            if(!empty($tick_Planta)){
+                $sql->bindValue(7, $tick_Planta);
+            }
             $sql->execute();
             /* retornar resultado en variable resultado y usarlo en el controllador */
             return $resultado=$sql->fetchAll();
@@ -324,16 +357,22 @@
             return $resultado=$sql->fetchAll();
         }
 
-        public function filtro_ticket($tip_id,$area_id,$tick_estado,$usu_asig_est,$sis_id){
+        public function filtro_ticket($tip_id,$area_id,$tick_estado,$usu_asig_est,$sis_id, $tick_Planta = ""){
             $conectar= parent::conexion();
             /*consulta SQL*/
             $sql="SP_L_TICKET_02 ?,?,?,?,?";
+            if(!empty($tick_Planta)){
+                $sql="SP_L_TICKET_02_PL ?,?,?,?,?,?";
+            }
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $tip_id);
             $sql->bindValue(2, $area_id);
             $sql->bindValue(3, $tick_estado);
             $sql->bindValue(4, $usu_asig_est);
             $sql->bindValue(5, $sis_id);
+            if(!empty($tick_Planta)){
+                $sql->bindValue(6, $tick_Planta);
+            }
             $sql->execute();
             /* retornar resultado en variable resultado y usarlo en el controllador */
             return $resultado=$sql->fetchAll();

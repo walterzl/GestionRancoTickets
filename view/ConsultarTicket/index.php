@@ -50,9 +50,9 @@
 							<label class="form-label semibold" for="tick_Planta">Planta</label>
 							<select id="tick_Planta" name="tick_Planta" class="select2" data-placeholder="Seleccionar">
 									<option label='Seleccionar'></option>
-									<option value='Planta Rancagua'>Planta Rancagua</option>
-									<option value='Planta Chimbarongo'>Planta Chimbarongo</option>
-									<option value='Planta Union'>Planta La Union</option>
+									<option value='Rancagua'>Rancagua</option>
+									<option value='Chimbarongo'>Chimbarongo</option>
+									<option value='La Union'>La Union</option>
 							</select>
 						</fieldset>
 					</div>
@@ -112,14 +112,14 @@
 						</fieldset>
 					</div>
 
-					<div class="col-lg-2">
+					<div class="col-lg-1">
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="usu_asig_est">&nbsp;</label>
 							<button type="submit" class="btn btn-rounded btn-default btn-block" id="btntodo">Ver Todo</button>
 						</fieldset>
 					</div>
 
-					<div class="col-lg-2">
+					<div class="col-lg-1">
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="usu_asig_est">&nbsp;</label>
 							<button type="submit" class="btn btn-rounded btn-primary btn-block" id="btnfiltrar">Filtrar</button>
