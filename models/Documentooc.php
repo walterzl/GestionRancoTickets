@@ -41,5 +41,17 @@
             return $resultado=$sql->fetchAll();
         }
 
+         /* Funcion necesaria para obtener registro x ticket solo agentes*/
+        public function get_documentooc_x_ticket_soloAgentes($tickoc_id){
+            $conectar= parent::conexion();
+            /* consulta sql */
+            $sql="SP_L_TICKETOC_DocumentosSoloAgentes ?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $tickoc_id);
+            $sql->execute();
+            /* retornar resultado en variable resultado y usarlo en el controllador */
+            return $resultado=$sql->fetchAll();
+        }
+
     }
 ?>

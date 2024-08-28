@@ -1,10 +1,16 @@
 ﻿<?php
+	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
   require_once("../../config/conexion.php"); 
   if(isset($_SESSION["usu_id"])){ 
 ?>
 <!DOCTYPE html>
 <html>
     <?php require_once("../MainHead/head.php");?>
+	<meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 	
 	<title>Ranco::Home</title>
@@ -25,7 +31,7 @@
 					<div class="row">
 
 						<?php
-							if ($_SESSION["rol_id"]==1 || $_SESSION["rol_id"]==9){
+							if ($_SESSION["rol_id"]==1 || $_SESSION["rol_id"]==4 || $_SESSION["rol_id"]==7){
 								?>
 									<div class="col-sm-4">
 										<article class="statistic-box green">
@@ -107,23 +113,50 @@
 
 			<!-- insercion de reporte para roles de Mantencion -->
 			<?php
-				if($_SESSION["rol_id"]==2 || $_SESSION["rol_id"]==3 || $_SESSION["rol_id"]==5 || $_SESSION["rol_id"]==6 || $_SESSION["rol_id"]==8  || $_SESSION["rol_id"]==9){
+				if($_SESSION["rol_id"]==2 || $_SESSION["rol_id"]==3 ){
 				?>
 
 					<section class="card">
-						<header class="card-header">
-							Reporte de Informacion General "Resumen SISORS - Gestion de Solicitudes Ranco" 
-						</header>
-						<div class="card-block" align="center">
-							Hoja 1 : SISOR TI Resumen /
-							Hoja 2 : SISOR Mantención Resumen /
-							Hoja 3 : SISOR Ordenes de Compra Resumen
-						</div>
-						<div class="card-block" align="center">
-							<!-- <p>Proximamente...Estado en mantenimiento.</p> -->
-							<iframe width="1000" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiYTk3ZjZjYzMtNDMwZS00ZjRlLWI1ODMtNjk3YTI1YWVjYzY1IiwidCI6ImE1YzkyYjc1LTNkM2MtNGU1Mi05NjIxLTVjNTIwYzhkMGY5NCIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe> 
-						</div>
-					</section>
+							
+							<header class="card-header">
+								Resumen General "Gestion de Solicitudes TI Ranco" 
+							</header>
+							<div class="card-block" align="center">
+								Hoja 1 : SISOR TI - Resumen 
+							</div>
+							<div class="card-block" align="center">
+								<!-- <p>Proximamente...Estado en mantenimiento.</p> -->
+								<iframe width="1000" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiNTQ4NjAxMDctMGQ3Ni00NzgxLWJmODEtNGU4NzMyNjg4Nzg2IiwidCI6ImE1YzkyYjc1LTNkM2MtNGU1Mi05NjIxLTVjNTIwYzhkMGY5NCIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe> 
+							</div>
+						</section>
+
+
+						
+
+					
+					
+				<?php
+			}?>
+
+
+			<!-- insercion de reporte para roles de adquisiciones -->
+			<?php
+				if( $_SESSION["rol_id"]==8  || $_SESSION["rol_id"]==9){
+				?>
+
+						<section class="card">
+							
+							<header class="card-header">
+								Resumen General "Gestion de Solicitudes Adquisiciones Ranco" 
+							</header>
+							<div class="card-block" align="center">
+								Hoja 1 : SISOR OC - Adquisiciones Resumen 
+							</div>
+							<div class="card-block" align="center">
+								<!-- <p>Proximamente...Estado en mantenimiento.</p> -->
+								<iframe width="1000" height="600" src="https://app.powerbi.com/view?r=eyJrIjoiMWM4YjllODgtOWUwOS00NjhkLTg0MGItOTE1MjUwZWFhMzU1IiwidCI6ImE1YzkyYjc1LTNkM2MtNGU1Mi05NjIxLTVjNTIwYzhkMGY5NCIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe> 
+							</div>
+						</section>
 
 					
 					

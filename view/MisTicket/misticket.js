@@ -52,6 +52,28 @@ $(document).ready(function(){
 
 });
 
+function asignar(tick_id){
+    $.post("../../controller/ticket.php?op=mostrar", {tick_id : tick_id}, function (data) {
+        data = JSON.parse(data);
+        $('#tick_id').val(data.tick_id);
+        $('#usu_asig').val(data.usu_asig).trigger('change');
+        /* Validacion de Estado de Ticket Antes de Asignar */
+        if (data.tick_estado_texto=='Abierto'){
+            $('#mdltitulo').html('Asignar Agente');
+            $("#modalasignar").modal('show');
+        }else{
+            swal({
+                title: "SISOR!",
+                text: "Error Ticket Cerrado.",
+                type: "warning",
+                confirmButtonClass: "btn-warning"
+            });
+        }
+
+    });
+
+}
+
 function filtro(usu_id,tip_id,area_id,tick_estado,usu_asig_est,tickoc_orden,estoc_id,fech_crea,tick_Planta){
     
     limpiartable();
@@ -135,30 +157,64 @@ $(document).on("click","#btntodo", function(){
 });
 
 function limpiartable(){
-    $('#table').html(
-        "<table id='ticket_data' class='table table-bordered table-striped table-vcenter js-dataTable-full'>"+
-                "<thead>"+
-                    "<tr>"+
+    if (sis_id==3){
+    
+        $('#table').html(
+            "<table id='ticket_data' class='table table-bordered table-striped table-vcenter js-dataTable-full'>"+
+                    "<thead>"+
+                        "<tr>"+
                         "<th style='width: 5%;'>Nro</th>"+
+                        "<th style='width: 5%;'>Orden Asignada</th>"+
                         "<th style='width: 15%;'>Tipo</th>"+
-                        "<th style='width: 15%;'>Categoria</th>"+
-                        "<th style='width: 15%;'>Planta</th>"+
                         "<th style='width: 15%;'>Area</th>"+
                         "<th style='width: 15%;'>Sub Area</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 40%;'>Titulo</th>"+
-                        "<th class='d-none d-sm-table-cell' style='width: 5%;'>Prioridad</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 20%;'>Planta</th>"+
+                        "<th style='width: 15%;'>Entrega</th>"+
+                        "<th style='width: 15%;'>Tiempo Esperado</th>"+
+                        "<th style='width: 15%;'>Cotizacion o Regularización</th>"+
+                        /* "<th style='width: 15%;'>Valor estimado</th>"+ */
+                        "<th style='width: 15%;'>Est.Orden</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 5%;'>Est.</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 20%;'>Fecha Creación</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 25%;'>Fecha Cierre</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 25%;'>Agente Asignado</th>"+
                         "<th class='text-center' style='width: 5%;'>Ver</th>"+
-                    "</tr>"+
-                "</thead>"+
-                "<tbody>"+
+                        "</tr>"+
+                    "</thead>"+
+                    "<tbody>"+
 
-                "</tbody>"+
-            "</table>"
-    );
+                    "</tbody>"+
+                "</table>"
+        );
+    }else{
+
+        $('#table').html(
+            "<table id='ticket_data' class='table table-bordered table-striped table-vcenter js-dataTable-full'>"+
+                    "<thead>"+
+                        "<tr>"+
+                        "<th style='width: 5%;'>Nro</th>"+
+                        "<th style='width: 15%;'>Tipo</th>"+
+                        "<th style='width: 15%;'>Categoria</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 20%;'>Planta</th>"+
+                        "<th style='width: 15%;'>Area</th>"+
+                        "<th style='width: 15%;'>Sub Area</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 40%;'>Titulo</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 5%;'>Prioridad.</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 5%;'>Est.</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 20%;'>Fecha Creación</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 20%;'>Fecha Cierre.</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 25%;'>Fecha Última Act</th>"+
+                        "<th class='d-none d-sm-table-cell' style='width: 25%;'>Agente Asignado</th>"+
+                        "<th class='text-center' style='width: 5%;'>Ver</th>"+
+                        "</tr>"+
+                    "</thead>"+
+                    "<tbody>"+
+
+                    "</tbody>"+
+                "</table>"
+        );
+    }
 }
 
 $(document).on("click","#btnfiltrar", function(){
@@ -227,6 +283,36 @@ $(document).on("click","#btnfiltrar", function(){
     }).DataTable();
 
 });
+
+function guardaryeditar(e){
+    e.preventDefault();
+	var formData = new FormData($("#ticket_form")[0]);
+    $.ajax({
+        url: "../../controller/ticket.php?op=asignar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function(datos){
+
+
+            var tick_id = $('#tick_id').val();
+
+            $("#modalasignar").modal('hide');
+            $('#ticket_data').DataTable().ajax.reload();
+
+            $.post("../../controller/email.php?op=ticket_asignar", {tick_id : tick_id}, function (data) {
+                swal({
+                    title: "SISOR!",
+                    text: "Completado.",
+                    type: "success",
+                    confirmButtonClass: "btn-success"
+                });
+            });
+
+        }
+    });
+}
 
 function ver(tick_id){
     if (sis_id==3){

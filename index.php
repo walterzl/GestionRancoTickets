@@ -1,4 +1,6 @@
 <?php
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
 require_once("config/conexion.php");
 $cone = new conectar();
 ?>
@@ -9,6 +11,11 @@ $cone = new conectar();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
     <title>Ranco::Acceso</title>
 
     <link href="img/favicon.144x144.png" rel="apple-touch-icon" type="image/png" sizes="144x144">
@@ -19,10 +26,10 @@ $cone = new conectar();
     <link href="img/favicon.ico" rel="shortcut icon">
 
 
-    <link rel="stylesheet" href="public/css/separate/pages/login.min.css">
-    <link rel="stylesheet" href="public/css/lib/font-awesome/font-awesome.min.css">
-    <link rel="stylesheet" href="public/css/lib/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/separate/pages/login.min.css?v=2">
+    <link rel="stylesheet" href="public/css/lib/font-awesome/font-awesome.min.css?v=2">
+    <link rel="stylesheet" href="public/css/lib/bootstrap/bootstrap.min.css?v=2">
+    <link rel="stylesheet" href="public/css/main.css?v=2">
 </head>
 
 <body>
@@ -59,7 +66,7 @@ $cone = new conectar();
                                 </div>
                                 </br>
 
-                                <header class="sign-title" HtmlEncode="false"><b>Acceso Usuarios</b> </br> Solicitudes TI Testing</header>
+                                <header class="sign-title" HtmlEncode="false"><b>Acceso Usuarios</b> </br> Solicitudes TI</header>
                                 <input type="hidden" id="sis_id" name="sis_id" value="1">
                             <?php
                                 break;

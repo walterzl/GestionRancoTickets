@@ -57,6 +57,10 @@
             $ticket->update_ticket_opcion($_POST["tick_id"],$_POST["tick_opc"]);
             break;
 
+        case "update_prioridaInterna":
+            $ticket->update_ticket_prioridaInterna($_POST["tick_id"],$_POST["tick_prioInt"]);
+            break;
+        
         case "update_tipo_categoria":
             $ticket->update_ticket_tipo_categoria($_POST["tick_id"],$_POST["tip_id"],$_POST["cat_id"]);
             break;
@@ -68,13 +72,20 @@
                 foreach($datos as $row){
                     $sub_array = array();
                     $sub_array[] = $row["tickoc_corre"];
-                    $sub_array[] = $row["tickoc_orden"];
+                    /* $sub_array[] = $row["tickoc_orden"]; */
+                    $sub_array[] = $row["numeroOrdenAsignado"];
                     $sub_array[] = $row["tip_nom"];
-                    $sub_array[] = $row["cat_nom"];
+                    /* $sub_array[] = $row["cat_nom"]; */
                     $sub_array[] = $row["area_nom"];
                     $sub_array[] = $row["suba_nom"];
                     $sub_array[] = $row["tickoc_titulo"];
+                    $sub_array[] = $row["tick_Planta"];
+                    $sub_array[] = $row["ent_nom"];
+                    $sub_array[] = $row["TiempoEsperado_nom"];
+                    $sub_array[] = $row["OpcionesCotizacion_nom"];
+                    /* $sub_array[] = $row["valor_estimado"]; */
                     $sub_array[] = $row["estoc_nom2"];
+                    
 
                     if ($row["tickoc_estado"]=="Abierto"){
                         $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
@@ -151,8 +162,15 @@
                         $sub_array[] = '<span class="label label-pill label-warning">Media</span>';
                     }else if ($row["tick_prio"]=="Alta"){
                         $sub_array[] = '<span class="label label-pill label-danger">Alta</span>';
+                    }else if ($row["tick_prio"]=="Consulta"){
+                        $sub_array[] = '<span class="label label-pill label-default">Consulta</span>';
+                    }else if ($row["tick_prio"]=="Requerimiento"){
+                        $sub_array[] = '<span class="label label-pill label-default">Requerimiento</span>';
+                    }else if ($row["tick_prio"]=="Incidente"){
+                        $sub_array[] = '<span class="label label-pill label-default">Incidente</span>';
                     }
     
+                    
                     if ($row["tick_estado"]=="Abierto"){
                         $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
                     }else{
@@ -207,6 +225,12 @@
                     $sub_array[] = '<span class="label label-pill label-warning">Media</span>';
                 }else if ($row["tick_prio"]=="Alta"){
                     $sub_array[] = '<span class="label label-pill label-danger">Alta</span>';
+                }else if ($row["tick_prio"]=="Consulta"){
+                    $sub_array[] = '<span class="label label-pill label-default">Consulta</span>';
+                }else if ($row["tick_prio"]=="Requerimiento"){
+                    $sub_array[] = '<span class="label label-pill label-default">Requerimiento</span>';
+                }else if ($row["tick_prio"]=="Incidente"){
+                    $sub_array[] = '<span class="label label-pill label-default">Incidente</span>';
                 }
 
                 if ($row["tick_estado"]=="Abierto"){
@@ -268,6 +292,12 @@
                     $sub_array[] = '<span class="label label-pill label-warning">Media</span>';
                 }else if ($row["tick_prio"]=="Alta"){
                     $sub_array[] = '<span class="label label-pill label-danger">Alta</span>';
+                }else if ($row["tick_prio"]=="Consulta"){
+                    $sub_array[] = '<span class="label label-pill label-default">Consulta</span>';
+                }else if ($row["tick_prio"]=="Requerimiento"){
+                    $sub_array[] = '<span class="label label-pill label-default">Requerimiento</span>';
+                }else if ($row["tick_prio"]=="Incidente"){
+                    $sub_array[] = '<span class="label label-pill label-default">Incidente</span>';
                 }
 
                 if ($row["tick_estado"]=="Abierto"){
@@ -277,6 +307,14 @@
                 }
 
                 $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
+
+
+                if ($row["ultimaActualizacion"]==""){
+                    $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
+                }else{
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["ultimaActualizacion"]));
+                }
+
                 if ($row["fech_cierre"]==""){
                     $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
                 }else{
@@ -308,13 +346,21 @@
             foreach($datos as $row){
                 $sub_array = array();
                 $sub_array[] = $row["tickoc_corre"];
-                $sub_array[] = $row["tickoc_orden"];
+                /* $sub_array[] = $row["tickoc_orden"]; */
+                $sub_array[] = $row["numeroOrdenAsignado"];
                 $sub_array[] = $row["tip_nom"];
-                $sub_array[] = $row["cat_nom"];
+                
+                /* $sub_array[] = $row["cat_nom"]; */
+                $sub_array[] = $row["Solicitante"];
                 $sub_array[] = $row["area_nom"];
                 $sub_array[] = $row["suba_nom"];
                 $sub_array[] = $row["tickoc_titulo"];
                 $sub_array[] = $row["estoc_nom2"];
+                $sub_array[] = $row["ent_nom"];
+                $sub_array[] = $row["TiempoEsperado_nom"];
+                $sub_array[] = $row["OpcionesCotizacion_nom"]; 
+                /* $sub_array[] = $row["valor_estimado"]; */
+                $sub_array[] = $row["tick_Planta"];
 
                 if ($row["tickoc_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
@@ -330,9 +376,9 @@
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                 }
 
-                $sub_array[] = $row["tickoc_geren"];
+               /*  $sub_array[] = $row["tickoc_geren"];
 
-                $sub_array[] = $row["tickoc_geren2"];
+                $sub_array[] = $row["tickoc_geren2"]; */
 
                 if ($row["usu_asig"]==""){
                     $sub_array[] = '<a onClick="asignar('.$row["tickoc_id"].');"  id="'.$row["tickoc_id"].'"><span class="label label-pill label-default">Sin Asignar</span></a>';
@@ -358,13 +404,20 @@
                 $data= Array();
                 foreach($datos as $row){
                     $sub_array = array();
+                    
                     $sub_array[] = $row["tickoc_corre"];
-                    $sub_array[] = $row["tickoc_orden"];
+                    /* $sub_array[] = $row["tickoc_orden"]; */
+                    $sub_array[] = $row["numeroOrdenAsignado"];
                     $sub_array[] = $row["tip_nom"];
-                    $sub_array[] = $row["cat_nom"];
+                    /* $sub_array[] = $row["cat_nom"]; */
                     $sub_array[] = $row["area_nom"];
                     $sub_array[] = $row["suba_nom"];
                     $sub_array[] = $row["tickoc_titulo"];
+                    $sub_array[] = $row["tick_Planta"];
+                    $sub_array[] = $row["ent_nom"];
+                    $sub_array[] = $row["TiempoEsperado_nom"];
+                    $sub_array[] = $row["OpcionesCotizacion_nom"];
+                    /* $sub_array[] = $row["valor_estimado"]; */
                     $sub_array[] = $row["estoc_nom2"];
 
                     if ($row["tickoc_estado"]=="Abierto"){
@@ -380,36 +433,14 @@
                         $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                     }
 
-                    /* if ($row["fech_dig"]==""){
-                        $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
-                    }else{
-                        $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_dig"]));
-                    }
-
-                    if ($row["fech_apro"]==""){
-                        $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
-                    }else{
-                        $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_apro"]));
-                    }
-
-                    if ($row["fech_envprov"]==""){
-                        $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
-                    }else{
-                        $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_envprov"]));
-                    }
-
-                    if ($row["fech_repbode"]==""){
-                        $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
-                    }else{
-                        $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_repbode"]));
-                    } */
-
                     if ($row["usu_asig"]==""){
-                        $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
+                        /* $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>'; */
+                        $sub_array[] = '<a onClick="asignar('.$row["tickoc_id"].');"  id="'.$row["tickoc_id"].'"><span class="label label-pill label-default">Sin Asignar</span></a>';
                     }else{
                         $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
                         foreach($datos1 as $row1){
-                            $sub_array[] = '<span class="label label-pill label-success">'.$row1["usu_nom"].'</span>';
+                            /* $sub_array[] = '<span class="label label-pill label-success">'.$row1["usu_nom"].'</span>'; */
+                            $sub_array[] = '<a onClick="asignar('.$row["tickoc_id"].');"  id="'.$row["tickoc_id"].'"><span class="label label-pill label-success">'.$row1["usu_nom"].'</span></a>';
                         }
                     }
 
@@ -442,6 +473,12 @@
                         $sub_array[] = '<span class="label label-pill label-warning">Media</span>';
                     }else if ($row["tick_prio"]=="Alta"){
                         $sub_array[] = '<span class="label label-pill label-danger">Alta</span>';
+                    }else if ($row["tick_prio"]=="Consulta"){
+                        $sub_array[] = '<span class="label label-pill label-default">Consulta</span>';
+                    }else if ($row["tick_prio"]=="Requerimiento"){
+                        $sub_array[] = '<span class="label label-pill label-default">Requerimiento</span>';
+                    }else if ($row["tick_prio"]=="Incidente"){
+                        $sub_array[] = '<span class="label label-pill label-default">Incidente</span>';
                     }
 
                     if ($row["tick_estado"]=="Abierto"){
@@ -451,21 +488,31 @@
                     }
 
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
+
                     if ($row["fech_cierre"]==""){
                         $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
                     }else{
                         $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
                     }
+                    
+                    if ($row["ultimaActualizacion"]==""){
+                        $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
+                    }else{
+                        $sub_array[] = date("d/m/Y H:i:s", strtotime($row["ultimaActualizacion"]));
+                    }
 
                     if ($row["usu_asig"]==""){
-                        $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
+                        /* $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>'; */
+                        $sub_array[] = '<a onClick="asignar('.$row["tick_id"].');"  id="'.$row["tick_id"].'"><span class="label label-pill label-default">Sin Asignar</span></a>';
                     }else{
                         $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
                         foreach($datos1 as $row1){
-                            $sub_array[] = '<span class="label label-pill label-success">'.$row1["usu_nom"].'</span>';
+                            /* $sub_array[] = '<span class="label label-pill label-success">'.$row1["usu_nom"].'</span>'; */
+                            $sub_array[] = '<a onClick="asignar('.$row["tick_id"].');"  id="'.$row["tick_id"].'"><span class="label label-pill label-success">'.$row1["usu_nom"].'</span></a>';
                         }
                     }
 
+                    /* $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>'; */
                     $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
                     $data[] = $sub_array;
                 }
@@ -543,6 +590,12 @@
                         $sub_array[] = '<span class="label label-pill label-warning">Media</span>';
                     }else if ($row["tick_prio"]=="Alta"){
                         $sub_array[] = '<span class="label label-pill label-danger">Alta</span>';
+                    }else if ($row["tick_prio"]=="Consulta"){
+                        $sub_array[] = '<span class="label label-pill label-default">Consulta</span>';
+                    }else if ($row["tick_prio"]=="Requerimiento"){
+                        $sub_array[] = '<span class="label label-pill label-default">Requerimiento</span>';
+                    }else if ($row["tick_prio"]=="Incidente"){
+                        $sub_array[] = '<span class="label label-pill label-default">Incidente</span>';
                     }
 
                     if ($row["tick_estado"]=="Abierto"){
@@ -552,6 +605,13 @@
                     }
 
                     $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
+
+                    if ($row["ultimaActualizacion"]==""){
+                        $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
+                    }else{
+                        $sub_array[] = date("d/m/Y H:i:s", strtotime($row["ultimaActualizacion"]));
+                    }
+
                     if ($row["fech_cierre"]==""){
                         $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
                     }else{
@@ -691,6 +751,7 @@
                         $output["suba_nom"] = $row["suba_nom"];
 
                         $output["tick_opc"] = $row["tick_opc"];
+                        $output["tick_prioInt"] = $row["tick_prioInt"];
 
                         if ($row["tick_estado"]=="Abierto"){
                             $output["tick_estado"] = '<span class="label label-pill label-success">Abierto</span>';

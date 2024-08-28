@@ -83,7 +83,7 @@
 						</fieldset>
 					</div>
 
-					<div class="col-lg-2" id="divestado">
+					<div class="col-lg-2" id="divestado" style='visibility: hidden'>
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="estoc_id">Estado Orden</label>
 							<select id="estoc_id" name="estoc_id" class="select2" data-placeholder="Seleccionar">
@@ -103,7 +103,7 @@
 					<div class="col-lg-2">
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="usu_asig_est">&nbsp;</label>
-							<button type="submit" class="btn btn-rounded btn-default btn-block" id="btntodo">Ver Todo</button>
+							<button type="submit" class="btn btn-rounded btn-default btn-block" id="btntodo">Todos</button>
 						</fieldset>
 					</div>
 
@@ -121,18 +121,21 @@
 					<thead>
 						<tr>
 							<th style="width: 5%;">Nro</th>
-							<th style="width: 5%;">Orden</th>
+							<!-- <th style="width: 5%;">Orden</th> -->
+							<th style="width: 5%;">Orden Asignada</th>
 							<th style="width: 15%;">Tipo</th>
-							<th style="width: 15%;">Categoria</th>
+							<th style="width: 15%;">Nombre Solicitante</th>
 							<th style="width: 15%;">Area</th>
 							<th style="width: 15%;">Sub Area</th>
 							<th class="d-none d-sm-table-cell" style="width: 40%;">Titulo</th>
 							<th class="d-none d-sm-table-cell" style="width: 40%;">Est.Orden</th>
+							<th style='width: 15%;'>Tiempo Esperado</th>
+							<th style='width: 15%;'>Cotizacion o Regularización</th>
+							<!-- <th style='width: 15%;'>Valor Estimado $</th> -->
+							<th style='width: 15%;'>Planta</th>
 							<th class="d-none d-sm-table-cell" style="width: 5%;">Est.</th>
 							<th class="d-none d-sm-table-cell" style="width: 20%;">Fecha Creación</th>
 							<th class="d-none d-sm-table-cell" style="width: 25%;">Fecha Cierre</th>
-							<th class="d-none d-sm-table-cell" style="width: 25%;">Est. Aprobacion Gerencia</th>
-							<th class="d-none d-sm-table-cell" style="width: 25%;">Est. Aprobacion G. General</th>
 							<th class="d-none d-sm-table-cell" style="width: 25%;">Agente Asignado</th>
 							<th class="text-center" style="width: 5%;">Ver</th>
 						</tr>

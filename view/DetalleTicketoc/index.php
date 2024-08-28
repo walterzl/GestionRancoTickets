@@ -30,7 +30,7 @@ if (isset($_SESSION["usu_id"])) {
                 <span class="label label-pill label-default" id="lblfechcrea"></span>
                 <ol class="breadcrumb breadcrumb-simple">
                   <li><a href="..\Home\">Home</a></li>
-                  <li><a href="..\Consultarticket\">Consultar Orden de Compra</a></li>
+                  <!-- <li><a href="..\Consultarticket\">Consultar Orden de Compra</a></li> -->
                   <li class="active">Detalle Orden de Compra</li>
                   <!-- <li><a href="javascript:history.go(-1);" style="color:#FF0000;">Volver Atras</a></li> -->
                 </ol>
@@ -44,19 +44,19 @@ if (isset($_SESSION["usu_id"])) {
 
               <input type="hidden" id="usu_asig" name="usu_asig">
 
-              <div class="col-lg-10">
+              <div class="col-lg-12">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tickoc_titulo">Titulo de la Solicitud</label>
                   <input type="text" class="form-control" id="tickoc_titulo" name="tickoc_titulo" readonly>
                 </fieldset>
               </div>
 
-              <div class="col-lg-2">
+              <!-- <div class="col-lg-2">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tickoc_coti_cerra">Ticket Cotizacion Asociado</label>
                   <input type="text" class="form-control" id="tickoc_coti_cerra" name="tickoc_coti_cerra" readonly>
                 </fieldset>
-              </div>
+              </div> -->
 
               <div class="col-lg-6" id="lbltipid">
                 <fieldset class="form-group">
@@ -70,14 +70,21 @@ if (isset($_SESSION["usu_id"])) {
                 </fieldset>
               </div>
 
-              <div class="col-lg-6" id="lbltipnom">
+              <div class="col-lg-6" id="planta">
+                <fieldset class="form-group">
+                  <label class="form-label semibold" for="tick_Planta">Planta</label>
+                  <input type="text" class="form-control" id="tick_Planta" name="tick_Planta" readonly>
+                </fieldset>
+              </div>
+
+             <!--  <div class="col-lg-6" id="lbltipnom">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tip_nom">Tipo Solicitud </label>
                   <input type="text" class="form-control" id="tip_nom" name="tip_nom" readonly>
                 </fieldset>
-              </div>
+              </div> -->
 
-              <div class="col-lg-6" id="lblcatid" style="visibility:hidden">
+              <!-- <div class="col-lg-6" id="lblcatid" style="visibility:hidden">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="cat_id">Tipo Categoria </label>
                   <select class="select2" id="cat_id" name="cat_id" data-placeholder="Seleccionar">
@@ -85,7 +92,7 @@ if (isset($_SESSION["usu_id"])) {
 
                   </select>
                 </fieldset>
-              </div>
+              </div> -->
 
               <div class="col-lg-6">
                 <fieldset class="form-group">
@@ -115,87 +122,104 @@ if (isset($_SESSION["usu_id"])) {
                 </fieldset>
               </div>
 
-              <div class="col-lg-6">
+              <!-- <div class="col-lg-6">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="dura_nom">Duración </label>
                   <input type="text" class="form-control" id="dura_nom" name="dura_nom" readonly>
                 </fieldset>
+              </div> -->
+
+              <div class="col-lg-6">
+                <fieldset class="form-group">
+                  <label class="form-label semibold" for="TiempoEsperado_nom">Tiempo Esperado </label>
+                  <input type="text" class="form-control" id="TiempoEsperado_nom" name="TiempoEsperado_nom" readonly>
+                </fieldset>
               </div>
 
-              <div class="col-lg-6" id="Ocultar_para_Cotizacion">
+              <div class="col-lg-6">
+                <fieldset class="form-group">
+                  <label class="form-label semibold" for="OpcionesCotizacion_nom">Cotizacion o Regularizaciòn* </label>
+                  <input type="text" class="form-control" id="OpcionesCotizacion_nom" name="OpcionesCotizacion_nom" readonly>
+                </fieldset>
+              </div>
+
+              <!-- <div class="col-lg-6">
+                <fieldset class="form-group">
+                  <label class="form-label semibold" for="valor_estimado">Valor Estimado Maximo</label>
+                  <input type="number" class="form-control" id="valor_estimado" name="valor_estimado" readonly>
+                </fieldset>
+              </div> -->
+
+
+              <!-- ORDENES -->
+
+              <div class="col-lg-12" id="Ocultar_para_Cotizacion" type="hidden" style="visibility:hidden">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tickoc_orden">Nro de Orden </label>
                   <input type="text" class="form-control" id="tickoc_orden" name="tickoc_orden">
                 </fieldset>
               </div>
 
-              <div class="col-lg-6">
+
+              <div class="col-lg-6"  id="RegistroOrden">
+                  <fieldset class="form-group">
+                      <label class="form-label semibold" for="numeroOrdenAsignado">Asociar Numero Orden</label>
+                      <div class="input-group bootstrap-touchspin input-group">
+                          <input type="number" class="form-control" id="numeroOrdenAsignado" name="numeroOrden_id" placeholder="Ingrese el numeroOrden para Registar" min="0" oninput="validity.valid||(value='');" required>
+                          <span class="input-group-addon bootstrap-touchspin-postfix btn btn-default" id="btnagregarNumeroOrden">Agregar</span>
+                      </div>
+                  </fieldset>
+              </div>
+
+              <?php
+                if( $_SESSION["rol_id"]==8  || $_SESSION["rol_id"]==9){
+                ?>
+
+                  <div class="col-lg-6">
+                    <fieldset class="form-group">
+                      <!-- <label class="form-label semibold" for="tickocd_descripusu" style="color:red;" align=center>Numero de Ordenes asignadas al Ticket</label> -->
+                      <div id = "lblOrdnesAsignadas">
+
+                      </div>
+
+                    </fieldset>
+                  </div>
+                  
+                <?php
+              }else {
+                # code...
+                ?>
+
+                <div class="col-lg-12">
+                  <fieldset class="form-group">
+                    <!-- <label class="form-label semibold" for="tickocd_descripusu" style="color:red;" align=center>Numero de Ordenes asignadas al Ticket</label> -->
+                    <div id = "lblOrdnesAsignadas">
+
+                    </div>
+
+                  </fieldset>
+                </div>
+                
+              <?php
+              }
+              
+              ?>
+
+              
+
+             
+              <!-- X -->
+              <div class="col-lg-12">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="estoc_id">Estado de la Orden</label>
 							    <div class="input-group bootstrap-touchspin input-group">
-                    <span class="input-group-btn"></span>
+                      <span class="input-group-btn"></span>
                       <select class="select2" id="estoc_id" name="estoc_id" data-placeholder="Seleccionar">
                       <option label="Seleccionar"></option>
 
                       </select>
                       <span class="input-group-addon bootstrap-touchspin-postfix btn btn-default" id="btnagregar">Agregar</span>
                   </div>
-                </fieldset>
-              </div>
-
-              <!-- TODO: Remplazado de los checkbox por un combobox -->
-              <div class="col-lg-6" id="Ocultar_para_Cotizacion2">
-                <!-- <label class="form-label semibold" for="tickoc_geren">Estado de aprobacion ↴</label> -->
-
-                <label class="form-label semibold" for="tickoc_geren">Estado de aprobacion Gerencia ↴: </label>
-                <select class="select2" id="tickoc_geren" name="tickoc_geren" data-placeholder="Seleccionar">
-                  <option label="Seleccionar"></option>
-                  <option value="PENDIENTE">Pendiente</option>
-                  <option value="SI">Aprobado Gerencia</option>
-                  <option value="NO">No Aprobado</option>
-                  <option value="NO APLICA">No aplica aprobación Gerencia</option>
-                </select>
-                
-                </br>
-                <label class="form-label semibold" for="tickoc_geren">Estado de aprobacion Gerencia General Sobre 1MM ↴: </label>
-                <select class="select2" id="tickoc_geren2" name="tickoc_geren2" data-placeholder="Seleccionar">
-                  <option label="Seleccionar"></option>
-                  <option value="PENDIENTE">Pendiente</option>
-                  <option value="SI">Aprobado Gerencia General</option>
-                  <option value="NO">No Aprobado Gerencia General</option>
-                  <option value="NO APLICA">No aplica aprobación Gerencia General</option>
-                </select>
-
-              </div>
-
-              <!-- TODO:Ocultar Check que no se usaran -->
-              <div class="col-lg-12" style="visibility:hidden">
-
-                <div class="checkbox">
-                  <input type="checkbox" id="tickoc_check1">
-                  <label for="tickoc_check1">Aprobación Gerencia</label>
-                </div>
-                <div class="checkbox">
-                  <input type="checkbox" id="tickoc_check2">
-                  <label for="tickoc_check2">Aprobación Gerencia General</label>
-                </div>
-              </div>
-
-              <div class="col-lg-12">
-                <fieldset class="form-group">
-                  <label class="form-label semibold" for="tickocd_descripusu">Cotizacion Formal y/o Documentos Adicionales</label>
-                  <table id="documentos_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">
-                    <thead>
-                      <tr>
-                        <th style="width: 90%;">Nombre</th>
-                        <th class="text-center" style="width: 5%;"></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                  </table>
-
                 </fieldset>
               </div>
 
@@ -208,6 +232,45 @@ if (isset($_SESSION["usu_id"])) {
 
                 </fieldset>
               </div>
+              
+
+              <div class="col-lg-12">
+                <fieldset class="form-group">
+                  <!-- <label class="form-label semibold" for="tickocd_descripusu">Cotizacion Formal y/o Documentos Adicionales</label> -->
+                  <table id="documentos_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                    <thead>
+                      <tr>
+                        <th style="width: 90%;">Documentos Solicitante</th>
+                        <th class="text-center" style="width: 5%;" align=center>Ver Documento</th>
+                      </tr>
+                    </thead>
+                    <tbody >
+
+                    </tbody>
+                  </table>
+
+                </fieldset>
+              </div>
+
+              <div class="col-lg-12">
+                <fieldset class="form-group">
+                 <!--  <label class="form-label semibold" for="tickocd_descripusu">Cotizacion Formal y/o Documentos Adicionales</label> -->
+                  <table id="documentos_data2" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                    <thead>
+                      <tr>
+                        <th style="width: 90%;">Documentos Agentes</th>
+                        <th class="text-center" style="width: 5%;" align=center>Ver Documento</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table>
+
+                </fieldset>
+              </div>
+
+              
 
               <div class="col-lg-12">
                 <fieldset class="form-group">
@@ -277,8 +340,20 @@ if (isset($_SESSION["usu_id"])) {
 
     <?php require_once("../MainJs/js.php"); ?>
 
-    <script type="text/javascript" src="detalleticketoc.js"></script>
+    <script type="text/javascript" src="detalleticketoc.js">
 
+      /* var rol = 10; */ // Aquí debes asignar el valor del rol dinámicamente
+
+      var rol =  $('#rol_idx').val();
+
+      console.log(rol);
+
+      if (rol != 7 ) {
+          document.getElementById('RegistroOrden').style.display = 'none';
+      }
+  
+   </script>
+    
   </body>
 
   </html>

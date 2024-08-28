@@ -143,6 +143,59 @@ $(document).ready(function(){
         }
     }).DataTable();
 
+    tabla=$('#documentos_data2').dataTable({
+        "aProcessing": true,
+        "aServerSide": true,
+        dom: 'Bfrtip',
+        "searching": true,
+        lengthChange: false,
+        colReorder: true,
+        buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+                ],
+        "ajax":{
+            url: '../../controller/documentooc.php?op=listar2',
+            type : "post",
+            data : {tickoc_id:tickoc_id},
+            dataType : "json",
+            error: function(e){
+                console.log(e.responseText);
+            }
+        },
+        "bDestroy": true,
+        "responsive": true,
+        "bInfo":true,
+        "iDisplayLength": 10,
+        "autoWidth": false,
+        "language": {
+            "sProcessing":     "Procesando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    }).DataTable();
+
     /* Si el rol es igual 1 entonces ocultar el combo de opcion ticket */
     if (rol_id==1 || rol_id==4 || rol_id==7 ){
         $('#lblopcion').hide();
@@ -165,12 +218,17 @@ $(document).ready(function(){
     /* Si rol es igual a 7 entonces sera de solo lectura */
     if (rol_id==1){
         $("#tickoc_orden").attr("readonly","readonly");
-        $("#estoc_id").attr("readonly","readonly");
+        $("#estoc_id").attr("readonly","readonly"); 
+        $("#numeroOrden_id").attr("readonly","readonly");
+        document.getElementById('RegistroOrden').style.display = 'none';
     }else if(rol_id==7){
         $("#tickoc_orden").attr("readonly","readonly");
         $("#estoc_id").attr("disabled", true);
         $("#tickoc_geren").attr("disabled", true);
         $("#tickoc_geren2").attr("disabled", true);
+        $("#numeroOrden_id").attr("readonly","readonly");
+        document.getElementById('RegistroOrden').style.display = 'none';
+        
     }
 
 });
@@ -244,6 +302,8 @@ $(document).on("click","#btnenviar", function(){
                     swal("Correcto!", "Registrado Correctamente", "success");
                 }
             });
+            // Refrescar las tablas
+            refreshDataTables();
 
         }else{
             /* TODO: En caso Contrario validar que se llene el combo opcion */
@@ -279,11 +339,19 @@ $(document).on("click","#btnenviar", function(){
                         }
                 });
 
+                // Refrescar las tablas
+                refreshDataTables();
+
             }
         }
 
     }
 });
+
+function refreshDataTables() {
+    $('#documentos_data').DataTable().ajax.reload();
+    $('#documentos_data2').DataTable().ajax.reload();
+}
 
 $(document).on("click","#btncerrarticket", function(){
     if (rol_id==1 || rol_id==4){
@@ -426,6 +494,13 @@ function listardetalle(tickoc_id){
                 $('#cntcon_nom').val(data.cntcon_nom +' '+data.cntcon_nom2);
 
                 $('#tickoc_opc').val(data.tickoc_opc).trigger('change');
+                $('#tick_Planta').val(data.tick_Planta);
+
+                $('#TiempoEsperado_nom').val(data.TiempoEsperado_nom);
+
+                $('#OpcionesCotizacion_nom').val(data.OpcionesCotizacion_nom);
+
+                $('#valor_estimado').val(data.valor_estimado);
 
                 //esconder Elementos si es cat=cotizacion
 
@@ -434,7 +509,7 @@ function listardetalle(tickoc_id){
                     document.getElementById('Ocultar_para_Cotizacion2').style.display = 'none';
                 }else{
                     document.getElementById('Ocultar_para_Cotizacion').style.display = 'block';
-                    document.getElementById('Ocultar_para_Cotizacion2').style.display = 'block';
+                    /* document.getElementById('Ocultar_para_Cotizacion2').style.display = 'block'; */
                 }
 
                 if (data.tickoc_estado_texto == "Cerrado"){
@@ -463,6 +538,12 @@ function listardetalle(tickoc_id){
                 $('#tickoc_geren2').val(data.tickoc_geren2).trigger('change');
 
                 $('#tickoc_orden').val(data.tickoc_orden);
+
+                $('#tick_Planta').val(data.tick_Planta);
+                $('#tick_PlantaTEXT').html(data.tick_Planta);
+                $('#TiempoEsperado_nom').val(data.TiempoEsperado_nom);
+                $('#OpcionesCotizacion_nom').val(data.OpcionesCotizacion_nom);
+                $('#valor_estimado').val(data.valor_estimado);
             }else{
                 window.open('../../404.php','_self');
             }
@@ -477,6 +558,10 @@ function listardetalle(tickoc_id){
         $('#lblestadosoc').html(data);
     });
 
+    $.post("../../controller/ticketoc.php?op=listarestadoOrdenesAsignadas", { tickoc_id : tickoc_id }, function (data) {
+        $('#lblOrdnesAsignadas').html(data);
+    });
+
 }
 
 $(document).on("click","#btnagregar", function(){
@@ -486,6 +571,37 @@ $(document).on("click","#btnagregar", function(){
     $.post("../../controller/ticketoc.php?op=agregar", { tickoc_id:tickoc_id,estoc_id:estoc_id,usu_id:usu_id}, function (data) {
         listardetalle(tickoc_id);
         swal("Correcto!", "Registrado Correctamente", "success");
+    });
+});
+
+/* if (rol==9) {
+    document.getElementById('RegistroOrden').style.display = 'none';
+} */
+
+$(document).on("click","#btnagregarNumeroOrden", function(){
+    var tickoc_id = getUrlParameter('ID');
+    var numeroOrdenAsignado = $('#numeroOrdenAsignado').val();
+    var usu_id = $('#user_idx').val();
+    
+
+    $.post("../../controller/ticketoc.php?op=validarNumeroOrden", { numeroOrdenAsignado: numeroOrdenAsignado }, function (response) {
+        /* console.log(response); */ // Imprimir el contenido de response en la consola
+        if (response == 1) {
+            // Mostrar mensaje de error si el número de orden ya existe
+            swal("Error!", "El número de orden ya ha sido registrado anteriormente", "error");
+        } else {
+            // Insertar el número de orden si no existe
+            $.post("../../controller/ticketoc.php?op=agregarNumeroOrden", {
+                tickoc_id: tickoc_id,
+                numeroOrdenAsignado: numeroOrdenAsignado,
+                usu_id: usu_id
+            }, function (data) {
+                listardetalle(tickoc_id);
+                swal("Correcto!", "Registrado Correctamente", "success");
+                // Restablecer el valor de #numeroOrdenAsignado a una cadena vacía
+                $('#numeroOrdenAsignado').val('');
+            });
+        }
     });
 });
 

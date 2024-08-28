@@ -115,7 +115,7 @@
 					<div class="col-lg-1">
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="usu_asig_est">&nbsp;</label>
-							<button type="submit" class="btn btn-rounded btn-default btn-block" id="btntodo">Ver Todo</button>
+							<button type="submit" class="btn btn-rounded btn-default btn-block" id="btntodo">Todos</button>
 						</fieldset>
 					</div>
 
@@ -142,6 +142,7 @@
 							<th class="d-none d-sm-table-cell" style="width: 5%;">Prioridad</th>
 							<th class="d-none d-sm-table-cell" style="width: 5%;">Est.</th>
 							<th class="d-none d-sm-table-cell" style="width: 20%;">Fecha Creación</th>
+							<th class="d-none d-sm-table-cell" style="width: 20%;">Fecha Última Act.</th>
 							<th class="d-none d-sm-table-cell" style="width: 25%;">Fecha Cierre</th>
 							<th class="d-none d-sm-table-cell" style="width: 25%;">Agente Asignado</th>
 							<th class="text-center" style="width: 5%;">Ver</th>

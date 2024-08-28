@@ -33,7 +33,7 @@ if (isset($_SESSION["usu_id"])) {
                 
                 <ol class="breadcrumb breadcrumb-simple">
                   <li><a href="..\Home\">Home</a></li>
-                  <li><a href="..\Consultarticket\">Consultar tickets</a></li>
+                  <!-- <li><a href="..\TicketIngresados\">Tickets Ingresados</a></li> -->
                   <li class="active">Detalle Ticket</li>
                   <!-- <li><a href="javascript:history.go(-1);" style="color:#FF0000;">Volver Atras</a></li> -->
                   <!-- <li><a href="window.history.back(-1);" style="color:#FF0000;">Volver Atras</a></li> -->
@@ -107,21 +107,56 @@ if (isset($_SESSION["usu_id"])) {
                 </fieldset>
               </div>
 
-              <div class="col-lg-4" id="planta">
+              <div class="col-lg-3" id="planta">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tick_Planta">Planta</label>
                   <input type="text" class="form-control" id="tick_Planta" name="tick_Planta" readonly>
                 </fieldset>
               </div>
 
-              <div class="col-lg-4">
+              <div class="col-lg-3">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tick_prio">Prioridad</label>
                   <input type="text" class="form-control" id="tick_prio" name="tick_prio" readonly>
                 </fieldset>
               </div>
 
-              <div class="col-lg-4" id="lblopcion">
+              <div class="col-lg-3" id="lbloPrioridaInterna">
+                <fieldset class="form-group">
+                  <label class="form-label semibold" for="tick_prioInt">Prioridad Interna</label>
+                  <select class="select2" id="tick_prioInt" name="tick_prioInt" data-placeholder="Seleccionar">
+                    <option label="Seleccionar"></option>
+                    <!-- opciones de sistema 1 TI -->
+                    <?php
+                      if($_SESSION["sis_id"]==1){
+                      ?>
+
+                        <option value="Baja">Baja</option>
+                        <option value="Media">Media</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Crítico">Crítico</option>
+                      
+                      <?php
+                    }?>
+                    
+
+                    <!-- opciones de sistema 2 Mantencion -->
+                    <?php
+                      if($_SESSION["sis_id"]==2){
+                      ?>
+
+                        <!-- <option value="Incidente">Incidente</option>
+                        <option value="Mantencion">Mantención</option>
+                        <option value="Modificacion">Modificacion</option>
+                        <option value="Mejora">Mejora</option> -->
+                        
+                      <?php
+                    }?>
+                  </select>
+                </fieldset>
+              </div>
+
+              <div class="col-lg-3" id="lblopcion">
                 <fieldset class="form-group">
                   <label class="form-label semibold" for="tick_opc">Opción</label>
                   <select class="select2" id="tick_opc" name="tick_opc" data-placeholder="Seleccionar">
@@ -132,8 +167,10 @@ if (isset($_SESSION["usu_id"])) {
                       ?>
 
                         <option value="Incidente">Incidente</option>
-                        <option value="Mantencion">Mantencion</option>
-                        
+                        <option value="Mantención">Mantención</option>
+                        <option value="Consulta">Consulta</option>
+                        <option value="Requerimiento">Requerimiento</option>
+                        <option value="Requerimiento">Mejora</option>
                       <?php
                     }?>
                     

@@ -1,10 +1,16 @@
 <?php
+	header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+	header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
   require_once("../../config/conexion.php"); 
   if(isset($_SESSION["usu_id"])){ 
 ?>
 <!DOCTYPE html>
 <html>
     <?php require_once("../MainHead/head.php");?>
+	<meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
 	<title>Ranco::Ticket por Grupo</title>
 </head>
 <body class="with-side-menu">
@@ -115,7 +121,7 @@
 					<div class="col-lg-1">
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="usu_asig_est">&nbsp;</label>
-							<button type="submit" class="btn btn-rounded btn-default btn-block" id="btntodo">Ver Todo</button>
+							<button type="submit" class="btn btn-rounded btn-default btn-block" id="btntodo">Todos</button>
 						</fieldset>
 					</div>
 
@@ -159,6 +165,7 @@
 										<th class="d-none d-sm-table-cell" style="width: 5%;">Prioridad</th>
 										<th class="d-none d-sm-table-cell" style="width: 5%;">Est.</th>
 										<th class="d-none d-sm-table-cell" style="width: 20%;">Fecha Creación</th>
+										<th class="d-none d-sm-table-cell" style="width: 20%;">Fecha Última Act.</th>
 										<th class="d-none d-sm-table-cell" style="width: 25%;">Fecha Cierre</th>
 										<th class="d-none d-sm-table-cell" style="width: 25%;">Agente Asignado</th>
 										<th class="text-center" style="width: 5%;">Ver</th>

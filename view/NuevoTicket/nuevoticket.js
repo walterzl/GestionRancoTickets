@@ -124,15 +124,37 @@ $(document).ready(function() {
 });
 
 function guardaryeditar(e){
+
     e.preventDefault();
+
+    // Deshabilita el botón "submit" antes de la petición AJAX
+    $("#ticket_form button[type='submit']").prop("disabled", true);
+
+    // Muestra el mensaje de espera
+    $("#loading-message1").show();
+
     var formData = new FormData($("#ticket_form")[0]);
     if ($('#tick_descrip').summernote('isEmpty') || $('#tick_titulo').val()=='' || $('#tick_prio').val()=='' || $('#suba_id').val()=='' || $('#tip_id').val()=='' || $('#cat_id').val()==''|| $('#tick_Planta').val()==''){
         swal("Advertencia!", "Campos Vacios", "warning");
+
+        // Habilita el botón "submit" nuevamente
+        $("#ticket_form button[type='submit']").prop("disabled", false);
+        // Oculta el mensaje de espera
+        $("#loading-message1").hide();
+
     }else{
         var totalfiles = $('#fileElem').get(0).files.length;
         for (var index = 0; index < totalfiles; index++) {
             formData.append("files[]", $('#fileElem')[0].files[index]);
         }
+
+        // Configurar un temporizador para mostrar el segundo mensaje después de 5 segundos
+        var timer = setTimeout(function () {
+            // Ocultar el primer mensaje de espera
+            $("#loading-message1").hide();
+            // Muestra el segundo mensaje de espera
+            $("#loading-message2").show();
+        }, 5000); // 5000 milisegundos son equivalentes a 5 segundos
 
         $.ajax({
             url: "../../controller/ticket.php?op=insert",
@@ -153,7 +175,7 @@ function guardaryeditar(e){
 
                 swal({
                     title: "Correcto!",
-                    text: "Ticket Generado : "+ data.tick_corre +" \n \n Sera redirigido al Home en unos segundos al dar en el boton 'Aceptar'",
+                    text: "Ticket Generado : "+ data.tick_corre +" \n \n Sera redirigido al Home en unos segundos al dar en el botón 'Aceptar'",
                     type: "success",
                     showCancelButton: false,
                     confirmButtonClass: "btn-success",
@@ -165,10 +187,16 @@ function guardaryeditar(e){
                         window.open('../home/','_self');
                     }
                 });
+
+                // Habilita el botón "submit" nuevamente después de mostrar el mensaje de éxito
+                $("#ticket_form button[type='submit']").prop("disabled", false);
+                // Oculta el mensaje de espera
+                $("#loading-message1").hide();
             }
         });
 
     }
+
 }
 
 function eliminar(doc_id){

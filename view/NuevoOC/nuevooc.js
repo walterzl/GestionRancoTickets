@@ -73,6 +73,14 @@ $(document).ready(function() {
         $('#cntcon_id').html(data);
     });
 
+    $.post("../../controller/tiempoesperado.php?op=combo",{sis_id:sis_id},function(data, status){
+        $('#tiempoesperado_id').html(data);
+    });
+
+    $.post("../../controller/opcionescotizacion.php?op=combo",{sis_id:sis_id},function(data, status){
+        $('#opcionescotizacion_id').html(data);
+    });
+
     $.post("../../controller/condicionpago.php?op=combo",{sis_id:sis_id},function(data, status){
         $('#condp_id').html(data);
     });
@@ -255,7 +263,7 @@ function guardaryeditar(e){
 
     e.preventDefault();
     var formData = new FormData($("#ticket_form")[0]);
-    if ($('#tickoc_descrip').summernote('isEmpty')  || $('#tickoc_titulo').val()=='' || $('#suba_id').val()=='' || $('#tip_id').val()=='' || $('#cat_id').val()==''){
+    if ($('#tickoc_descrip').summernote('isEmpty')  || $('#tickoc_titulo').val()=='' || $('#valor_estimado').val()=='' ||  $('#suba_id').val()=='' || $('#tip_id').val()=='' || $('#cat_id').val()==''|| $('#tick_Planta').val()==''){
         swal("Advertencia!", "Campos Vacios", "warning");
     }else{
         var totalfiles = $('#fileElem').get(0).files.length;
@@ -273,6 +281,7 @@ function guardaryeditar(e){
                 console.log(data);
                 data = JSON.parse(data);
                 $('#tickoc_titulo').val('');
+                $('#valor_estimado').val('');
                 $('#tickoc_descrip').summernote('reset');
 
                 $("#area_id").select2({disabled:'readonly'});
@@ -358,6 +367,14 @@ function seleccionar(tickoc_id){
 
         $.post("../../controller/plancontable.php?op=combo_select", { sis_id: 3,cntcon_id: data.cntcon_id }, function (data) {
             $("#cntcon_id").html(data);
+        });
+
+        $.post("../../controller/tiempoesperado.php?op=combo_select", { sis_id: 3,tiempoesperado_id: data.tiempoesperado_id }, function (data) {
+            $("#tiempoesperado_id").html(data);
+        });
+
+        $.post("../../controller/opcionescotizacion.php?op=combo_select", { sis_id: 3,opcionescotizacion_id: data.opcionescotizacion_id }, function (data) {
+            $("#opcionescotizacion_id").html(data);
         });
 
     });

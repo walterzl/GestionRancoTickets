@@ -1,4 +1,6 @@
 <?php
+  header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+  header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
   require_once("../../config/conexion.php"); 
   if(isset($_SESSION["usu_id"])){ 
 ?>
@@ -6,6 +8,10 @@
 <html>
     <?php require_once("../MainHead/head.php");?>
 	<title>Ranco::Tickets ingresados por mi</title>
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Last-Modified" content="0">
+	<meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+	<meta http-equiv="Pragma" content="no-cache">
 </head>
 <body class="with-side-menu">
 
@@ -35,7 +41,14 @@
 
 			<div class="box-typical box-typical-padding">
 
-				<div class="row">
+			<?php 
+				if($_SESSION["sis_id"]==3){
+				?> 
+										
+				<?php
+				}else{
+				?> 
+					<div class="row">
 					<div class="col-lg-2">
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="tip_id">Tipo</label>
@@ -49,10 +62,26 @@
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="tick_Planta">Planta</label>
 							<select id="tick_Planta" name="tick_Planta" class="select2" data-placeholder="Seleccionar">
-									<option label='Seleccionar'></option>
-									<option value='Rancagua'>Rancagua</option>
-									<option value='Chimbarongo'>Chimbarongo</option>
-									<option value='La Union'>La Union</option>
+
+							<?php 
+								if($_SESSION["sis_id"]==3){
+									?> 
+										<option value='Rancagua'>Rancagua</option>
+										<option value='Chimbarongo'>Chimbarongo</option>
+										<option value='Rancagua y Chimbarongo'>Rancagua y Chimbarongo</option>
+										<option value='La Union'>La Union</option>
+										<option value='Plantas Externas'>Plantas Externas</option>
+									<?php
+								}else{
+									?> 
+										<option label='Seleccionar'></option>
+										<option value='Rancagua'>Rancagua</option>
+										<option value='Chimbarongo'>Chimbarongo</option>
+										<option value='La Union'>La Union</option>
+									<?php
+								}
+							?>
+									
 							</select>
 						</fieldset>
 					</div>
@@ -115,7 +144,7 @@
 					<div class="col-lg-1">
 						<fieldset class="form-group">
 							<label class="form-label semibold" for="usu_asig_est">&nbsp;</label>
-							<button type="submit" class="btn btn-rounded btn-default btn-block" id="btntodo">Ver Todo</button>
+							<button type="submit" class="btn btn-rounded btn-default btn-block" id="btntodo">Todos</button>
 						</fieldset>
 					</div>
 
@@ -125,7 +154,12 @@
 							<button type="submit" class="btn btn-rounded btn-primary btn-block" id="btnfiltrar">Filtrar</button>
 						</fieldset>
 					</div>
-				</div>
+				</div>					
+				<?php
+				}
+			?>
+
+				
 			</div>
 
 			<div class="box-typical box-typical-padding" id="table">
@@ -136,22 +170,20 @@
 								if($_SESSION["sis_id"]==3){
 									?> 
 										<th style="width: 5%;">Nro</th>
-										<th style="width: 5%;">Orden</th>
+										<th style="width: 5%;">Orden Asignada</th>
 										<th style="width: 15%;">Tipo</th>
-										<th style="width: 15%;">Categoria</th>
 										<th style="width: 15%;">Area</th>
 										<th style="width: 15%;">Sub Area</th>
 										<th class="d-none d-sm-table-cell" style="width: 40%;">Titulo</th>
-										<th class="d-none d-sm-table-cell" style="width: 40%;">Est.Orden</th>
+										<th class="d-none d-sm-table-cell" style="width: 40%;">Planta</th>
+										<th style='width: 15%;'>Entrega</th>
+										<th style='width: 15%;'>Tiempo Esperado</th>
+										<th style='width: 15%;'>Cotizacion o Regularización</th>
+										<!-- <th style='width: 15%;'>Valor Estimado $</th> -->
+										<th style='width: 15%;'>Est.Orden</th>
 										<th class="d-none d-sm-table-cell" style="width: 5%;">Est.</th>
-										<th class="d-none d-sm-table-cell" style="width: 20%;">Fech.Creación</th>
-										<th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Cierre</th>
-										<!-- columnas de flujo -->
-										<!-- <th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Orden Digitada</th>
-										<th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Orden Aprobada</th>
-										<th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Orden Env.Prov.</th>
-										<th class="d-none d-sm-table-cell" style="width: 25%;">Fech.Orden Recep.Bodega</th> -->
-										<!--  -->
+										<th class="d-none d-sm-table-cell" style="width: 20%;">Fecha Creación</th>
+										<th class="d-none d-sm-table-cell" style="width: 25%;">Fecha Cierre</th>
 										<th class="d-none d-sm-table-cell" style="width: 25%;">Agente Asignado</th>
 										<th class="text-center" style="width: 5%;">Ver</th>
 									<?php

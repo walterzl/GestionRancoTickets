@@ -21,6 +21,7 @@
             $sql->execute();
             /* genera el ultimo id ingresado para alertar en la vista al generar el ticket */
             $sql1="SELECT tick_id,tick_corre FROM tm_ticket WHERE tick_id = @@IDENTITY";
+            /* $sql1="SELECT tick_id,tick_corre FROM tm_ticket WHERE tick_id = SCOPE_IDENTITY()"; */
             $sql1=$conectar->prepare($sql1);
             $sql1->execute();
             return $resultado=$sql1->fetchall(pdo::FETCH_ASSOC);
@@ -339,6 +340,18 @@
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $tick_id);
             $sql->bindValue(2, $tick_opc);
+            $sql->execute();
+            /* retornar resultado en variable resultado y usarlo en el controllador */
+            return $resultado=$sql->fetchAll();
+        }
+
+        public function update_ticket_prioridaInterna($tick_id,$tick_prioInt){
+            $conectar= parent::conexion();
+            /*consulta SQL*/
+            $sql="SP_U_TICKET_03 ?,?";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $tick_id);
+            $sql->bindValue(2, $tick_prioInt);
             $sql->execute();
             /* retornar resultado en variable resultado y usarlo en el controllador */
             return $resultado=$sql->fetchAll();

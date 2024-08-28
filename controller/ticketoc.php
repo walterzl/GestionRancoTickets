@@ -24,7 +24,7 @@
                 $duracion = $_POST["dura_id"];
             }
 
-            $datos=$ticketoc->insert_ticketoc($_POST["usu_id"],$_POST["cat_id"],$_POST["tickoc_titulo"],$_POST["tickoc_descrip"],$_POST["area_id"],$_POST["suba_id"],$_POST["tip_id"],$entrega,$_POST["cntcon_id"],$duracion,$_POST["tickoc_coti_cerra"]);
+            $datos=$ticketoc->insert_ticketoc($_POST["usu_id"],$_POST["cat_id"],$_POST["tickoc_titulo"],$_POST["tickoc_descrip"],$_POST["area_id"],$_POST["suba_id"],$_POST["tip_id"],$entrega,$_POST["cntcon_id"],$duracion,$_POST["tickoc_coti_cerra"],$_POST["tick_Planta"],$_POST["tiempoesperado_id"],$_POST["opcionescotizacion_id"],$_POST["valor_estimado"]);
             if(is_array($datos)==true and count($datos)>0){
                 foreach($datos as $row)
                 {
@@ -74,21 +74,27 @@
             $datos=$ticketoc->listar_ticketoc_x_usu($_POST["usu_id"]);
             $data= Array();
             foreach($datos as $row){
-                $sub_array = array();
                 $sub_array[] = $row["tickoc_corre"];
-                $sub_array[] = $row["tip_nom"];
-                $sub_array[] = $row["cat_nom"];
-                $sub_array[] = $row["area_nom"];
-                $sub_array[] = $row["suba_nom"];
-                $sub_array[] = $row["tickoc_titulo"];
+                    $sub_array[] = $row["tickoc_orden"];
+                    $sub_array[] = $row["tip_nom"];
+                    /* $sub_array[] = $row["cat_nom"]; */
+                    $sub_array[] = $row["area_nom"];
+                    $sub_array[] = $row["suba_nom"];
+                    $sub_array[] = $row["tickoc_titulo"];
+                    $sub_array[] = $row["estoc_nom2"];
+                    $sub_array[] = $row["ent_nom"];
+                    $sub_array[] = $row["TiempoEsperado_nom"];
+                    $sub_array[] = $row["OpcionesCotizacion_nom"];
+                    $sub_array[] = $row["valor_estimado"];
+                    /* $sub_array[] = $row["tick_Planta"]; */
 
-                if ($row["tickoc_prio"]=="Baja"){
+                /* if ($row["tickoc_prio"]=="Baja"){
                     $sub_array[] = '<span class="label label-pill label-default">Baja</span>';
                 }else if ($row["tickoc_prio"]=="Media"){
                     $sub_array[] = '<span class="label label-pill label-warning">Media</span>';
                 }else if ($row["tickoc_prio"]=="Alta"){
                     $sub_array[] = '<span class="label label-pill label-danger">Alta</span>';
-                }
+                } */
 
                 if ($row["tickoc_estado"]=="Abierto"){
                     $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
@@ -261,58 +267,120 @@
             break;
 
         case "listar_x_asig":
-            $datos=$ticketoc->listar_ticketoc_x_asig($_POST["usu_asig"]);
-            $data= Array();
-            foreach($datos as $row){
-                $sub_array = array();
-                $sub_array[] = $row["tickoc_corre"];
-                $sub_array[] = $row["tip_nom"];
-                $sub_array[] = $row["cat_nom"];
-                $sub_array[] = $row["area_nom"];
-                $sub_array[] = $row["suba_nom"];
-                $sub_array[] = $row["tickoc_titulo"];
+            if ($_SESSION["sis_id"]==3){
+                $datos=$ticketoc->listar_ticketoc_x_asig($_POST["usu_asig"]);
+                $data= Array();
+                foreach($datos as $row){
+                    $sub_array = array();
+                    
+                    $sub_array[] = $row["tickoc_corre"];
+                    $sub_array[] = $row["tickoc_orden"];
+                    $sub_array[] = $row["tip_nom"];
+                    /* $sub_array[] = $row["cat_nom"]; */
+                    $sub_array[] = $row["area_nom"];
+                    $sub_array[] = $row["suba_nom"];
+                    $sub_array[] = $row["tickoc_titulo"];
+                    $sub_array[] = $row["tick_Planta"];
+                    $sub_array[] = $row["ent_nom"];
+                    $sub_array[] = $row["TiempoEsperado_nom"];
+                    $sub_array[] = $row["OpcionesCotizacion_nom"];
+                    $sub_array[] = $row["valor_estimado"];
+                    $sub_array[] = $row["estoc_nom2"];
 
-                if ($row["tickoc_prio"]=="Baja"){
-                    $sub_array[] = '<span class="label label-pill label-default">Baja</span>';
-                }else if ($row["tickoc_prio"]=="Media"){
-                    $sub_array[] = '<span class="label label-pill label-warning">Media</span>';
-                }else if ($row["tickoc_prio"]=="Alta"){
-                    $sub_array[] = '<span class="label label-pill label-danger">Alta</span>';
-                }
-
-                if ($row["tickoc_estado"]=="Abierto"){
-                    $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
-                }else{
-                    $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
-                }
-
-                $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
-                if ($row["fech_cierre"]==""){
-                    $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
-                }else{
-                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
-                }
-
-                if ($row["usu_asig"]==""){
-                    $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>';
-                }else{
-                    $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
-                    foreach($datos1 as $row1){
-                        $sub_array[] = '<span class="label label-pill label-success">'.$row1["usu_nom"].'</span>';
+                    if ($row["tickoc_estado"]=="Abierto"){
+                        $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
+                    }else{
+                        $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
                     }
+
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
+                    if ($row["fech_cierre"]==""){
+                        $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
+                    }else{
+                        $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
+                    }
+
+
+                    if ($row["usu_asig"]==""){
+                        /* $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>'; */
+                        $sub_array[] = '<a onClick="asignar('.$row["tickoc_id"].');"  id="'.$row["tickoc_id"].'"><span class="label label-pill label-default">Sin Asignar</span></a>';
+                    }else{
+                        $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
+                        foreach($datos1 as $row1){
+                            /* $sub_array[] = '<span class="label label-pill label-success">'.$row1["usu_nom"].'</span>'; */
+                            $sub_array[] = '<a onClick="asignar('.$row["tickoc_id"].');"  id="'.$row["tickoc_id"].'"><span class="label label-pill label-success">'.$row1["usu_nom"].'</span></a>';
+                        }
+                    }
+
+                    $sub_array[] = '<button type="button" onClick="ver('.$row["tickoc_id"].');"  id="'.$row["tickoc_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
+                    $data[] = $sub_array;
                 }
 
-                $sub_array[] = '<button type="button" onClick="ver('.$row["tickoc_id"].');"  id="'.$row["tickoc_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
-                $data[] = $sub_array;
-            }
+                $results = array(
+                    "sEcho"=>1,
+                    "iTotalRecords"=>count($data),
+                    "iTotalDisplayRecords"=>count($data),
+                    "aaData"=>$data);
+                echo json_encode($results);
+            }else{
+                $datos=$ticket->listar_ticket_x_asig($_POST["usu_asig"], $_POST["tip_id"],$_POST["area_id"],$_POST["tick_estado"],$_POST["usu_asig_est"],$_POST["sis_id"],$_POST["tick_Planta"]);
+                $data= Array();
+                foreach($datos as $row){
+                    $sub_array = array();
+                    $sub_array[] = $row["tick_corre"];
+                    $sub_array[] = $row["tip_nom"];
+                    $sub_array[] = $row["cat_nom"];
+                    $sub_array[] = $row["tick_Planta"]; 
+                    $sub_array[] = $row["area_nom"];
+                    $sub_array[] = $row["suba_nom"];
+                    $sub_array[] = $row["tick_titulo"];
 
-            $results = array(
-                "sEcho"=>1,
-                "iTotalRecords"=>count($data),
-                "iTotalDisplayRecords"=>count($data),
-                "aaData"=>$data);
-            echo json_encode($results);
+                    if ($row["tick_prio"]=="Baja"){
+                        $sub_array[] = '<span class="label label-pill label-default">Baja</span>';
+                    }else if ($row["tick_prio"]=="Media"){
+                        $sub_array[] = '<span class="label label-pill label-warning">Media</span>';
+                    }else if ($row["tick_prio"]=="Alta"){
+                        $sub_array[] = '<span class="label label-pill label-danger">Alta</span>';
+                    }
+
+                    if ($row["tick_estado"]=="Abierto"){
+                        $sub_array[] = '<span class="label label-pill label-success">Abierto</span>';
+                    }else{
+                        $sub_array[] = '<span class="label label-pill label-danger">Cerrado</span>';
+                    }
+
+                    $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_crea"]));
+                    if ($row["fech_cierre"]==""){
+                        $sub_array[] = '<span class="label label-pill label-default">Pendiente</span>';
+                    }else{
+                        $sub_array[] = date("d/m/Y H:i:s", strtotime($row["fech_cierre"]));
+                    }
+
+                    if ($row["usu_asig"]==""){
+                        /* $sub_array[] = '<span class="label label-pill label-default">Sin Asignar</span>'; */
+                        $sub_array[] = '<a onClick="asignar('.$row["tick_id"].');"  id="'.$row["tick_id"].'"><span class="label label-pill label-default">Sin Asignar</span></a>';
+                    }else{
+                        $datos1=$usuario->get_usuario_x_id($row["usu_asig"]);
+                        foreach($datos1 as $row1){
+                            /* $sub_array[] = '<span class="label label-pill label-success">'.$row1["usu_nom"].'</span>'; */
+                            $sub_array[] = '<a onClick="asignar('.$row["tick_id"].');"  id="'.$row["tick_id"].'"><span class="label label-pill label-success">'.$row1["usu_nom"].'</span></a>';
+                        }
+                    }
+
+                    /* $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>'; */
+                    $sub_array[] = '<button type="button" onClick="ver('.$row["tick_id"].');"  id="'.$row["tick_id"].'" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-eye"></i></button>';
+                    $data[] = $sub_array;
+                }
+
+                $results = array(
+                    "sEcho"=>1,
+                    "iTotalRecords"=>count($data),
+                    "iTotalDisplayRecords"=>count($data),
+                    "aaData"=>$data);
+                echo json_encode($results);
+            }
             break;
+
 
         case "listar_x_grupo":
             $datos=$ticketoc->listar_ticketoc_x_grupo($_POST["grupo_id"]);
@@ -504,6 +572,15 @@
                         $output["tickoc_check2"] = $row["tickoc_check2"];
                         $output["tickoc_geren"] = $row["tickoc_geren"];
                         $output["tickoc_geren2"] = $row["tickoc_geren2"];
+                        $output["tick_Planta"] = $row["tick_Planta"];
+
+                        $output["TiempoEsperado_nom"] = $row["TiempoEsperado_nom"];
+                        $output["TiempoEsperado_nom2"] = $row["TiempoEsperado_nom2"];
+
+                        $output["OpcionesCotizacion_nom"] = $row["OpcionesCotizacion_nom"];
+                        $output["OpcionesCotizacion_nom2"] = $row["OpcionesCotizacion_nom2"];
+
+                        $output["valor_estimado"] = $row["valor_estimado"];
 
                         $output["estoc_id"] = $row["estoc_id"];
                     }
@@ -614,6 +691,23 @@
             $ticketoc->agregar_ticketoc($_POST["tickoc_id"],$_POST["estoc_id"],$_POST["usu_id"]);
             break;
 
+        case "agregarNumeroOrden":
+            $ticketoc->agregar_ticketoc_NumeroOrden($_POST["tickoc_id"],$_POST["numeroOrdenAsignado"]);
+            break;
+
+        case "validarNumeroOrden":
+            $resultado = $ticketoc->listar_segun_ticket_OrdenAsignada2($_POST["numeroOrdenAsignado"]);
+            if ($resultado) {
+                // Si hay resultados, significa que el número de orden ya existe
+                echo "1";
+            } else {
+                // Si no hay resultados, el número de orden no existe
+                echo "2";
+            }
+
+           /*  echo json_encode($resultado); */
+            break;
+
         case "insertotro":
             $ticketoc->insert_otro_ticketoc($_POST["tickoc_id"]);
             break;
@@ -718,5 +812,45 @@
             }
             break;
 
-    }
+            case "listarestadoOrdenesAsignadas":
+                $datos=$ticketoc->listar_segun_ticket_OrdenAsignada($_POST["tickoc_id"]);
+                if (is_array($datos) == true and count($datos) <> 0) {
+                    ?>
+                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center; color:red;">Numeros de Ordenes asignadas al Ticket</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <?php
+                                    $numeros = array();
+                                    foreach ($datos as $row) {
+                                        $numeros[] = $row['numeroOrdenAsignado'];
+                                    }
+                                    echo implode(' - ', $numeros);
+                                    ?>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php } else { ?>
+                    <p>No se encontraron órdenes asignadas para este ticket.</p>
+                <?php }
+                /* if (is_array($datos) == true and count($datos) <> 0) {
+                    $numerosAsignados = "Los números asignados son: ";
+                    foreach ($datos as $index => $row) {
+                        $numerosAsignados .= $row['numeroOrdenAsignado'] . ", ";
+                    }
+                    // Eliminar la última coma y espacio
+                    $numerosAsignados = rtrim($numerosAsignados, ", ");
+                    echo $numerosAsignados;
+                } else {
+                    echo "No se encontraron órdenes asignadas para este ticket.";
+                } */
+                break;
+            }
+
 ?>

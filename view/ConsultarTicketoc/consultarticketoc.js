@@ -160,18 +160,22 @@ function limpiartable(){
                 "<thead>"+
                     "<tr>"+
                         "<th style='width: 5%;'>Nro</th>"+
-                        "<th style='width: 5%;'>Orden</th>"+
+                        /* "<th style='width: 5%;'>Orden</th>"+ */
+                        "<th style='width: 5%;'>Orden Asignada</th>"+
                         "<th style='width: 15%;'>Tipo</th>"+
-                        "<th style='width: 15%;'>Categoria</th>"+
+                        "<th style='width: 15%;'>Nombre Solicitante</th>"+
                         "<th style='width: 15%;'>Area</th>"+
                         "<th style='width: 15%;'>Sub Area</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 40%;'>Titulo</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 40%;'>Est.Orden</th>"+
+                        "<th style='width: 15%;'>Entrega</th>"+
+                        "<th style='width: 15%;'>Tiempo Esperado</th>"+
+                        "<th style='width: 15%;'>Cotizacion o Regularización</th>"+
+                        /* "<th style='width: 15%;'>Valor estimado</th>"+ */
+                        "<th style='width: 15%;'>Planta</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 5%;'>Est.</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 20%;'>Fecha Creación</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 25%;'>Fecha Cierre</th>"+
-                        "<th class='d-none d-sm-table-cell' style='width: 25%;'>Est. Aprobacion Gerencia</th>"+
-                        "<th class='d-none d-sm-table-cell' style='width: 25%;'>Est. Aprobacion G. General</th>"+
                         "<th class='d-none d-sm-table-cell' style='width: 25%;'>Agente Asignado</th>"+
                         "<th class='text-center' style='width: 5%;'>Ver</th>"+
                     "</tr>"+

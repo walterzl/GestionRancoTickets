@@ -21,10 +21,10 @@
 	<link href="public/img/favicon.png" rel="icon" type="image/png">
 	<link href="public/img/favicon.ico" rel="shortcut icon">
 
-    <link rel="stylesheet" href="public/css/separate/pages/login.min.css">
-    <link rel="stylesheet" href="public/css/lib/font-awesome/font-awesome.min.css">
-    <link rel="stylesheet" href="public/css/lib/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/main.css">
+    <link rel="stylesheet" href="public/css/separate/pages/login.min.css?v=2">
+    <link rel="stylesheet" href="public/css/lib/font-awesome/font-awesome.min.css?v=2">
+    <link rel="stylesheet" href="public/css/lib/bootstrap/bootstrap.min.css?v=2">
+    <link rel="stylesheet" href="public/css/main.css?v=2">
 </head>
 <body>
     <div class="page-center">

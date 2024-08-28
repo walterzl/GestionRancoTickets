@@ -60,6 +60,8 @@ class Email  extends PHPMailer
             $this->FromName = $this->tu_nombre = "Ticket Abierto N° ".$correla." - ".$tip_nom;
             $this->CharSet = 'UTF8';
             $this->addAddress($correo);
+
+            $this->addAddress("wzuniga@ranco.cl");
             
             /* Correo Grupal para alerta */
             $this->addAddress($usu_grupal);
@@ -128,7 +130,7 @@ class Email  extends PHPMailer
         $this->SMTPSecure = 'tls';
         $this->FromName = $this->tu_nombre = "Ticket Abierto N° ".$correla." - ".$tip_nom;
         $this->CharSet = 'UTF8';
-        $this->addAddress($correo);
+        /* $this->addAddress($correo); */
         /* $this->addAddress("wzuniga@ranco.cl"); */
         
         /* Correo Grupal para alerta */
@@ -437,6 +439,9 @@ class Email  extends PHPMailer
             $correo = $row["usu_correo"];
             $descripcion= $row["tick_descrip"];
             $planta=$row["tick_Planta"];
+            $usuapellido = $row["usu_ape"];
+            $subarea= $row["suba_nom"];
+            
 
             $sis_nom = $row["sis_nom"];
             $tip_nom = $row["tip_nom"];
@@ -499,10 +504,13 @@ class Email  extends PHPMailer
             /* parametros del template a remplazar */
             $cuerpo = str_replace('xnroticket', $id, $cuerpo);
             $cuerpo = str_replace('lblNomUsu', $usu, $cuerpo);
+            $cuerpo = str_replace('lblApellidoUsu', $usuapellido, $cuerpo);
             $cuerpo = str_replace('lblTitu', $titulo, $cuerpo);
             $cuerpo = str_replace('lblPrio', $prioridad, $cuerpo);
             $cuerpo = str_replace('lblCate', $categoria, $cuerpo);
             $cuerpo = str_replace('lblAre', $area, $cuerpo);
+            $cuerpo = str_replace('lblsubarea', $subarea, $cuerpo);
+            $cuerpo = str_replace('lblPlanta', $planta, $cuerpo);
             $cuerpo = str_replace('lblDescripcion', $descripcion, $cuerpo);
             $cuerpo = str_replace('lblsisnom', $sis_nom, $cuerpo);
             $cuerpo = str_replace('tbodyFinal', $tbodyFinal, $cuerpo);

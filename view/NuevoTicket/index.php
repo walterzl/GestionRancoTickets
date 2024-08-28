@@ -1,10 +1,18 @@
 <?php
+header("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+header("Expires: Sat, 1 Jul 2000 05:00:00 GMT"); // Fecha en el pasado
   require_once("../../config/conexion.php");
   if(isset($_SESSION["usu_id"])){
 ?>
 <!DOCTYPE html>
 <html>
     <?php require_once("../MainHead/head.php");?>
+
+	<meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+	
 	<title>Ranco::Nuevo Ticket</title>
 </head>
 <body class="with-side-menu">
@@ -35,7 +43,7 @@
 			<form method="post" id="ticket_form">
 				<div class="box-typical box-typical-padding">
 					<p>
-						Desde esta ventana podra generar nuevos tickets de HelpDesk. Ingrese todos los datos e informacion solicitados en el formulario, <b>los campos obligatorios presentan este simbolo a su costado (*).</b>
+						Desde esta ventana podrá generar nuevos tickets de HelpDesk. Ingrese todos los datos e información solicitados en el formulario, <b>los campos obligatorios presentan este símbolo a su costado (*).</b>
 					</p>
 
 					<h5 class="m-t-lg with-border">Ingresar Información</h5>
@@ -93,6 +101,9 @@
 									<option value='Baja'>Baja</option>
 									<option value='Media'>Media</option>
 									<option value='Alta'>Alta</option>
+									<!-- <option value='Consulta'>Consulta</option>
+									<option value='Requerimiento'>Requerimiento</option>
+									<option value='Requerimiento'>Incidente</option> -->
 								</select>
 							</fieldset>
 						</div>
@@ -112,6 +123,10 @@
 								</div>
 							</fieldset>
 						</div>
+
+						<div id="loading-message1" style="display: none; text-align: center; font-style: italic; font-weight: bold;">Cargando...</div>
+
+						<div id="loading-message2" style="display: none; text-align: center; font-style: italic; font-weight: bold;">Problema en la conexion, por favor verifique y vuelva a cargar la web</div>
 
 						<div class="col-lg-12 text-center text-center" text-center>
 							<button type="submit" name="action" value="add" class="btn btn-rounded btn-inline btn-primary">Guardar</button>

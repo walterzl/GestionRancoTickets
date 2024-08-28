@@ -25,6 +25,8 @@
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $tip_nom);
             $sql->bindValue(2, $tip_id);
+            // Imprimir la consulta para validarla
+            echo $sql->queryString;
             $sql->execute();
             /* retornar resultado en variable resultado y usarlo en el controllador */
             return $resultado=$sql->fetchAll();

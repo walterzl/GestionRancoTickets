@@ -129,6 +129,7 @@ $(document).ready(function(){
     /* Si el rol es igual 1 entonces ocultar el combo de opcion ticket */
     if (rol_id==1 || rol_id==4 || rol_id==7 ){
         $('#lblopcion').hide();
+        $('#lbloPrioridaInterna').hide();
 
         $('#lbltipid').hide();
         $('#lblcatid').hide();
@@ -137,6 +138,7 @@ $(document).ready(function(){
         $('#lblcatnom').show();
     }else{
         $('#lblopcion').show();
+        $('#lbloPrioridaInterna').show();
 
         $('#lbltipid').show();
         $('#lblcatid').show();
@@ -168,6 +170,7 @@ $(document).on("click","#btnenviar", function(){
     var usu_id = $('#user_idx').val();
     var tickd_descrip = $('#tickd_descrip').val();
     var tick_opc = $('#tick_opc').val();
+    var tick_prioInt = $('#tick_prioInt').val();
 
     var tip_id = $('#tip_id').val();
     var cat_id = $('#cat_id').val();
@@ -215,9 +218,16 @@ $(document).on("click","#btnenviar", function(){
             /* En caso Contrario validar que se llene el combo opcion */
             if ($('#tick_opc').val()==0){
                 /* Mensaje de Error */
-                swal("Advertencia!", "Seleccione Opcion de Ticket", "warning");
+                swal("Advertencia!", "Seleccione Opcion del Ticket", "warning");
+            }else if($('#tick_prioInt').val()==0){
+                /* Mensaje de Error */
+                swal("Advertencia!", "Seleccione Prioridad Interna del Ticket", "warning");
             }else{
                 $.post("../../controller/ticket.php?op=update_opcion", { tick_id:tick_id,tick_opc:tick_opc}, function (data) {
+
+                });
+
+                $.post("../../controller/ticket.php?op=update_prioridaInterna", { tick_id:tick_id,tick_prioInt:tick_prioInt}, function (data) {
 
                 });
 
@@ -349,6 +359,59 @@ $(document).on("click","#btncerrarticket", function(){
                 confirmButtonClass: "btn-warning"
             });
         }
+
+        if ($('#tick_prioInt').val()||null){
+            if ($('#usu_asig').val()||null){ /* de '' -> null */
+                swal({
+                    title: "SISOR!",
+                    text: "Esta seguro de Cerrar el Ticket?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-warning",
+                    confirmButtonText: "Si",
+                    cancelButtonText: "No",
+                    closeOnConfirm: false
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        var tick_id = getUrlParameter('ID');
+                        var usu_id = $('#user_idx').val();
+                        $.post("../../controller/ticket.php?op=update", { tick_id : tick_id,usu_id : usu_id }, function (data) {
+
+                        });
+
+                        $.post("../../controller/email.php?op=ticket_cerrado",{tick_id:tick_id},function(data, status){
+
+                        });
+
+                        listardetalle(tick_id);
+
+                        swal({
+                            title: "SISOR!",
+                            text: "Ticket Cerrado correctamente.",
+                            type: "success",
+                            confirmButtonClass: "btn-success"
+                        });
+                    }
+                });
+            }else{
+                /* mensaje de envio correcto*/
+                swal({
+                    title: "SISOR!",
+                    text: "Error no se puede cerrar Ticket, Se debe asignar un Agente primero.",
+                    type: "warning",
+                    confirmButtonClass: "btn-warning"
+                });
+            }
+        }else{
+            /* mensaje de envio correcto*/
+            swal({
+                title: "SISOR!",
+                text: "Error Seleccione Prioridad Interna antes de cerrar el ticket.",
+                type: "warning",
+                confirmButtonClass: "btn-warning"
+            });
+        }
     }
 });
 
@@ -394,6 +457,7 @@ function listardetalle(tick_id){
                 $('#usu_asig').val(data.usu_asig);
 
                 $('#tick_opc').val(data.tick_opc).trigger('change');
+                $('#tick_prioInt').val(data.tick_prioInt).trigger('change');
 
                 if (data.tick_estado_texto == "Cerrado"){
                     $('#pnldetalle').hide();
