@@ -28,7 +28,7 @@
 
         public static function ruta(){
             /* Ruta principal del proyecto se centraliza desde aqui toda la ruta principal del proyecto */
-			return "ticketsisor.up.railway.app/courageous-alignment/";
+			return "ticketsisor.up.railway.app/GestionRanco/";
             /* return "https://testing.ticket.ranco.cl/GestionRanco2/"; */
             /* return "http://localhost/GestionRanco2/"; */
             
